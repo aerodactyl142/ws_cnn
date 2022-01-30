@@ -118,6 +118,7 @@ end
 reg signed [7:0] x_in [0:kernel_size]; //0:3 or 0:5
 //integer i, n, fc_times;
 integer n = 0;
+integer p,q,m;
 //reg [7:0] a,b,c,d,f;
 //reg [14:0] e;//,f;
 initial begin
@@ -160,42 +161,54 @@ $display(bias);
 //        xin[i] = ImageMem[i];
 //    end
 en = 1;
-for (n=0; n<=kernel_size; n=n+1) begin
-x1 = ImageMem[0];
-#period;
-x1 = ImageMem[1];
-x2 = ImageMem[IMG_WIDTH]; //5
-#period;
-//$display($time,x1,wt[2],o11);
-//$display(x2,wt[5],o21);
-x1 = ImageMem[2];
-x2 = ImageMem[IMG_WIDTH+1]; //6
-x3 = ImageMem[2*IMG_WIDTH]; //10
-//$display($time,x3,wt[2],bias,o11);
-#period;
-//$display($time,x1,wt[2],o11);
-//$display(x3,wt[8],o31);
-x1 = zero_bias;
-x2 = ImageMem[7];
-x3 = ImageMem[11];
-#period;
-//$display($time,x1,wt[2],o11);
 
-x2 = zero_bias;
-x3 = ImageMem[12];
-#period;
-//$display($time,x1,wt[2],o11);
-
-x3 = zero_bias;
-//$display((o31+o32+o33)*SF);
-
+for (p=0;p<IMG_WIDTH+kernel_size;p=p+1) begin //horizontal
+for (m=0;m<kernel_size;m=m+1) begin
+if (p<m) x_in[m] = 8'b0;
+else if (IMG_WIDTH*(m+1) <= m*IMG_WIDTH+p-m)
+x_in[m] = 8'b0;
+else
+x_in[m] = ImageMem[m*IMG_WIDTH+p-m];
 end
-#30;
-en = 0;
+
+#period;
+//x1 = ImageMem[0];
+//#period;
+//x1 = ImageMem[1];
+//x2 = ImageMem[IMG_WIDTH]; //5
+//#period;
+////$display($time,x1,wt[2],o11);
+////$display(x2,wt[5],o21);
+//x1 = ImageMem[2];
+//x2 = ImageMem[IMG_WIDTH+1]; //6
+//x3 = ImageMem[2*IMG_WIDTH]; //10
+////$display($time,x3,wt[2],bias,o11);
+//#period;
+////$display($time,x1,wt[2],o11);
+////$display(x3,wt[8],o31);
+//x1 = zero_bias;
+//x2 = ImageMem[7];
+//x3 = ImageMem[11];
+//#period;
+////$display($time,x1,wt[2],o11);
+
+//x2 = zero_bias;
+//x3 = ImageMem[12];
+//#period;
+////$display($time,x1,wt[2],o11);
+
+//x3 = zero_bias;
+////$display((o31+o32+o33)*SF);
+
+////end
+
+//#30; //hold for a while after inputs end??
+//en = 0;
 //    #2000;
     //counter put into a and b
 //    a = count[0];
 //    b = count[1];
+end
 end
 //////////////////////input buffer stuff//////////////////////////
 // // Inputs
