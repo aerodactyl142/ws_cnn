@@ -13,9 +13,6 @@ reg [7:0] WeightMem [0:MAX_WGT];
 reg load_w = 0;
 reg [7:0] wt [0:8];
 //reg load_data = 0;
-reg [7:0] x1;
-reg [7:0] x2;
-reg [7:0] x3;
 
 reg [7:0] bias; //only one bias per set of weights, the others all 0
 wire [7:0] outpt;
@@ -58,7 +55,7 @@ initial $readmemb("test_wt.dat",WeightMem);
 wire [7:0] ot [0:2];
 design_1 pe3 (.bias(bias), .CLR(clr), .psum2(zero_bias), .psum3(zero_bias), .enable(en), 
 .outp1(ot[0]), .outp2(ot[1]),.outp3(ot[2]),.Q(outpt), .load_w(load_w), .sys_clk(clk), 
-.w0(wt[2]), .w1(wt[1]), .w2(wt[0]),.w21(wt[5]),.w22(wt[4]),.w23(wt[3]),.w31(wt[8]),.w32(wt[7]),.w33(wt[6]), .x1(x1), .x2(x2), .x3(x3)); 
+.w0(wt[2]), .w1(wt[1]), .w2(wt[0]),.w21(wt[5]),.w22(wt[4]),.w23(wt[3]),.w31(wt[8]),.w32(wt[7]),.w33(wt[6]), .x1(x_in[0]), .x2(x_in[1]), .x3(x_in[2])); 
 
 //wire signed [7:0] o11,o21,o31,fx11,fx21,fx31;
 //WS_PE pe11(.psum(bias), .enable(en), .sys_clk(clk), .load_w(load_w), .win(wt[2]), .xin(x1), .outp(o11), .f_inp(fx11));
@@ -114,8 +111,7 @@ clr = 1;
 #period;
 clr = 0;
 end
-
-reg signed [7:0] x_in [0:kernel_size]; //0:3 or 0:5
+reg signed [7:0] x_in [0:kernel_size-1]; //0:3 or 0:5
 //integer i, n, fc_times;
 integer n = 0;
 integer p,q,m;
@@ -136,9 +132,6 @@ for (n=0;n<=kernel_size; n=n+1) begin
     x_in[n] = zero_bias;
 end
 
-x1 = zero_bias;
-x2 = zero_bias;
-x3 = zero_bias;
 //weights only need to be loaded one time
 //$display("Contents of Mem after reading data file:");
 //for (n=0; n<304/PE_SIZE; n=n+1) begin
@@ -147,6 +140,7 @@ for (k=0; k<PE_SIZE; k=k+1)
 //    for (k=n*PE_SIZE; k<(n+1)*PE_SIZE; k=k+1) //load weights
 //        $display("%d:%b",k,WeightMem[k]);
         wt[k] = WeightMem[k]; 
+        
     en = 0;
     load_w = 1;
 //    end
@@ -162,53 +156,67 @@ $display(bias);
 //    end
 en = 1;
 
-for (p=0;p<IMG_WIDTH+kernel_size;p=p+1) begin //horizontal
+//start sequence
+//x_in[0] = ImageMem[0];
+for (q=0;q<layer_step;q=q+1) begin //vertical
+//for (p=0;p<kernel_size*(IMG_WIDTH+1);p=p+1) begin //horizontal
+for (p=0;p<IMG_WIDTH+kernel_size-1;p=p+1) begin //horizontal
 for (m=0;m<kernel_size;m=m+1) begin
-if (p<m) x_in[m] = 8'b0;
-else if (IMG_WIDTH*(m+1) <= m*IMG_WIDTH+p-m)
-x_in[m] = 8'b0;
-else
-x_in[m] = ImageMem[m*IMG_WIDTH+p-m];
-end
+//for (n=0;n<kernel_size;n=n+1) begin
 
+if (p<m) x_in[m] = 8'b0; //handles the start
+else if (p>IMG_WIDTH-1+m) x_in[m] = 8'b0;
+//else if (IMG_WIDTH*(m+1) <= kernel_size*m*IMG_WIDTH+p-m)
+////x_in[m] = 8'b0;
+//x_in[m] = 8'b1; //this condition!
+//else if (q<m || q>IMG_WIDTH-m)
+//x_in[m] = 8'b0;
+else
+x_in[m] = ImageMem[(m+q)*IMG_WIDTH+p-m];
+end
+$display($time," ", outpt*SF);
 #period;
-//x1 = ImageMem[0];
+end
+end
+x_in[kernel_size-1] = zero_bias; //reset last element to zero after 1 period
+bias = zero_bias; //reset bias
+//three outputs, 4 gaps (between lines), three outputs again
+$display($time," ", outpt*SF);
+#period;
+$display($time," ", outpt*SF);
+#period;
+$display($time," ", outpt*SF);
+
+//x_in[0] = ImageMem[0];
 //#period;
-//x1 = ImageMem[1];
-//x2 = ImageMem[IMG_WIDTH]; //5
+//x_in[0] = ImageMem[1];
+//x_in[1] = ImageMem[IMG_WIDTH]; //5
 //#period;
 ////$display($time,x1,wt[2],o11);
 ////$display(x2,wt[5],o21);
-//x1 = ImageMem[2];
-//x2 = ImageMem[IMG_WIDTH+1]; //6
-//x3 = ImageMem[2*IMG_WIDTH]; //10
+//x_in[0] = ImageMem[2];
+//x_in[1] = ImageMem[IMG_WIDTH+1]; //6
+//x_in[2] = ImageMem[2*IMG_WIDTH]; //10
 ////$display($time,x3,wt[2],bias,o11);
 //#period;
 ////$display($time,x1,wt[2],o11);
 ////$display(x3,wt[8],o31);
-//x1 = zero_bias;
-//x2 = ImageMem[7];
-//x3 = ImageMem[11];
+//x_in[0] = zero_bias;
+//x_in[1] = ImageMem[7];
+//x_in[2] = ImageMem[11];
 //#period;
 ////$display($time,x1,wt[2],o11);
 
-//x2 = zero_bias;
-//x3 = ImageMem[12];
+//x_in[1] = zero_bias;
+//x_in[2] = ImageMem[12];
 //#period;
 ////$display($time,x1,wt[2],o11);
 
-//x3 = zero_bias;
-////$display((o31+o32+o33)*SF);
-
+//x_in[2] = zero_bias;
 ////end
+//#100; //hold for a while after inputs end??
 
-//#30; //hold for a while after inputs end??
-//en = 0;
-//    #2000;
-    //counter put into a and b
-//    a = count[0];
-//    b = count[1];
-end
+
 end
 //////////////////////input buffer stuff//////////////////////////
 // // Inputs
