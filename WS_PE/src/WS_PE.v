@@ -20,21 +20,21 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module WS_PE(
-    input signed [7:0] xin,
-    input signed [7:0] win,
-    input signed [7:0] psum,
+    input signed [9:0] xin,
+    input signed [9:0] win,
+    input signed [9:0] psum,
     input load_w,
     input sys_clk,
     input enable,
-    output reg signed [7:0] outp,
-    output reg signed [7:0] f_inp
+    output reg signed [9:0] outp,
+    output reg signed [9:0] f_inp
     );
-
-reg signed [7:0] weights;
+//1 bit sign, 3 bits int, 6 bits fraction
+reg signed [9:0] weights;
 //wire signed [14:0] pout = xin*weights;
-reg signed [14:0] pout;
+reg signed [18:0] pout;
 //reg signed [14:0] long_bias;
-reg signed [7:0] test;
+reg signed [9:0] test;
 //reg [7:0] hold;
 //reg [7:0] forward;
 //reg signed [7:0] tout;
@@ -42,7 +42,7 @@ reg signed [7:0] test;
 
 //always @ (*)
 //pout = weights * xin;
-localparam SF = 2.0**-6.0;  // Q1.6 scaling factor is 2^-6
+localparam SF = 2.0**-6.0;  // Q3.6 scaling factor is 2^-6
 
 always @ (load_w) begin
     weights = win;
@@ -53,14 +53,14 @@ if (enable) begin
 //    forward = xin;
 //    if (load_w == 1'b1)
 //        weights = win;
-    if (xin == 8'b0)
+    if (xin == 10'b0)
         outp = psum;
-    else if (weights == 8'b0)
+    else if (weights == 10'b0)
         outp = psum;
-    else if (psum[7] == 1'b0) begin //positive bias
+    else if (psum[9] == 1'b0) begin //positive bias
 //        long_bias = psum<<6;
         pout = weights * xin;// + long_bias;// + long_bias;
-        outp = {pout[14], pout[12:6]} + psum;
+        outp = {pout[18], pout[14:6]} + psum;
 //        $display($time," %b * %b = %b, truncated to %b", weights, xin, pout, outp);
 //        $display(pout);
 //        $display("%f * %f = %f", (weights), (xin), (pout));

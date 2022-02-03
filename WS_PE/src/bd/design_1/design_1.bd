@@ -1,15 +1,17 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xF394B7827FDF78B",
+      "boundary_crc": "0xCE25194A8FBC75BF",
       "device": "xc7z020clg400-1",
       "gen_directory": "../../../../cnn.gen/sources_1/bd/design_1",
       "name": "design_1",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2020.2"
+      "tool_version": "2020.2",
+      "validated": "true"
     },
     "design_tree": {
+      "accum_0": "",
       "WS_PE_0": "",
       "WS_PE_1": "",
       "WS_PE_2": "",
@@ -18,23 +20,33 @@
       "WS_PE_4": "",
       "WS_PE_7": "",
       "WS_PE_5": "",
-      "WS_PE_8": "",
-      "accum_0": ""
+      "WS_PE_8": ""
     },
     "ports": {
       "sys_clk": {
         "type": "clk",
         "direction": "I",
         "parameters": {
+          "CLK_DOMAIN": {
+            "value": "design_1_sys_clk",
+            "value_src": "default"
+          },
           "FREQ_HZ": {
             "value": "100000000"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.000",
+            "value_src": "default"
           }
         }
-      },
-      "bias": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
       },
       "load_w": {
         "direction": "I"
@@ -42,101 +54,156 @@
       "enable": {
         "direction": "I"
       },
-      "w0": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "w2": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "w1": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "x1": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "psum2": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "psum3": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "x2": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "x3": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "w21": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "w22": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "w23": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "w31": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "w32": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
-      "w33": {
-        "direction": "I",
-        "left": "7",
-        "right": "0"
-      },
       "CLR": {
         "direction": "I"
       },
       "Q": {
         "direction": "O",
-        "left": "7",
+        "left": "9",
         "right": "0"
       },
       "outp2": {
         "direction": "O",
-        "left": "7",
+        "left": "9",
         "right": "0"
       },
       "outp3": {
         "direction": "O",
-        "left": "7",
+        "left": "9",
         "right": "0"
       },
       "outp1": {
         "direction": "O",
-        "left": "7",
+        "left": "9",
+        "right": "0"
+      },
+      "w13": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "psum3": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "psum2": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "w12": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "w22": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "x1": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "psum1": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "w11": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "x2": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "w21": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "w23": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "w32": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "w33": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "x3": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "w31": {
+        "direction": "I",
+        "left": "9",
         "right": "0"
       }
     },
     "components": {
+      "accum_0": {
+        "vlnv": "xilinx.com:module_ref:accum:1.0",
+        "xci_name": "design_1_accum_0_0",
+        "xci_path": "ip\\design_1_accum_0_0\\design_1_accum_0_0.xci",
+        "inst_hier_path": "accum_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "accum",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "sys_clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_sys_clk",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "CLR": {
+            "direction": "I"
+          },
+          "D1": {
+            "direction": "I",
+            "left": "9",
+            "right": "0"
+          },
+          "D2": {
+            "direction": "I",
+            "left": "9",
+            "right": "0"
+          },
+          "D3": {
+            "direction": "I",
+            "left": "9",
+            "right": "0"
+          },
+          "Q": {
+            "direction": "O",
+            "left": "9",
+            "right": "0"
+          }
+        }
+      },
       "WS_PE_0": {
         "vlnv": "xilinx.com:module_ref:WS_PE:1.0",
         "xci_name": "design_1_WS_PE_0_0",
@@ -150,17 +217,17 @@
         "ports": {
           "xin": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "win": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "psum": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "load_w": {
@@ -168,19 +235,29 @@
           },
           "sys_clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_sys_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "enable": {
             "direction": "I"
           },
           "outp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "f_inp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           }
         }
@@ -198,17 +275,17 @@
         "ports": {
           "xin": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "win": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "psum": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "load_w": {
@@ -216,19 +293,29 @@
           },
           "sys_clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_sys_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "enable": {
             "direction": "I"
           },
           "outp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "f_inp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           }
         }
@@ -246,17 +333,17 @@
         "ports": {
           "xin": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "win": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "psum": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "load_w": {
@@ -264,19 +351,29 @@
           },
           "sys_clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_sys_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "enable": {
             "direction": "I"
           },
           "outp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "f_inp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           }
         }
@@ -294,17 +391,17 @@
         "ports": {
           "xin": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "win": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "psum": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "load_w": {
@@ -312,19 +409,29 @@
           },
           "sys_clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_sys_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "enable": {
             "direction": "I"
           },
           "outp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "f_inp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           }
         }
@@ -342,17 +449,17 @@
         "ports": {
           "xin": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "win": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "psum": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "load_w": {
@@ -360,19 +467,29 @@
           },
           "sys_clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_sys_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "enable": {
             "direction": "I"
           },
           "outp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "f_inp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           }
         }
@@ -390,17 +507,17 @@
         "ports": {
           "xin": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "win": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "psum": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "load_w": {
@@ -408,19 +525,29 @@
           },
           "sys_clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_sys_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "enable": {
             "direction": "I"
           },
           "outp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "f_inp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           }
         }
@@ -438,17 +565,17 @@
         "ports": {
           "xin": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "win": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "psum": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "load_w": {
@@ -456,19 +583,29 @@
           },
           "sys_clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_sys_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "enable": {
             "direction": "I"
           },
           "outp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "f_inp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           }
         }
@@ -486,17 +623,17 @@
         "ports": {
           "xin": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "win": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "psum": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "load_w": {
@@ -504,19 +641,29 @@
           },
           "sys_clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_sys_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "enable": {
             "direction": "I"
           },
           "outp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "f_inp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           }
         }
@@ -534,17 +681,17 @@
         "ports": {
           "xin": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "win": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "psum": {
             "direction": "I",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "load_w": {
@@ -552,59 +699,29 @@
           },
           "sys_clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_sys_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "enable": {
             "direction": "I"
           },
           "outp": {
             "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           },
           "f_inp": {
             "direction": "O",
-            "left": "7",
-            "right": "0"
-          }
-        }
-      },
-      "accum_0": {
-        "vlnv": "xilinx.com:module_ref:accum:1.0",
-        "xci_name": "design_1_accum_0_0",
-        "xci_path": "ip\\design_1_accum_0_0\\design_1_accum_0_0.xci",
-        "inst_hier_path": "accum_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "accum",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "sys_clk": {
-            "type": "clk",
-            "direction": "I"
-          },
-          "CLR": {
-            "direction": "I"
-          },
-          "D1": {
-            "direction": "I",
-            "left": "7",
-            "right": "0"
-          },
-          "D2": {
-            "direction": "I",
-            "left": "7",
-            "right": "0"
-          },
-          "D3": {
-            "direction": "I",
-            "left": "7",
-            "right": "0"
-          },
-          "Q": {
-            "direction": "O",
-            "left": "7",
+            "left": "9",
             "right": "0"
           }
         }
@@ -614,6 +731,7 @@
       "sys_clk_1": {
         "ports": [
           "sys_clk",
+          "accum_0/sys_clk",
           "WS_PE_0/sys_clk",
           "WS_PE_1/sys_clk",
           "WS_PE_2/sys_clk",
@@ -622,14 +740,7 @@
           "WS_PE_4/sys_clk",
           "WS_PE_7/sys_clk",
           "WS_PE_5/sys_clk",
-          "WS_PE_8/sys_clk",
-          "accum_0/sys_clk"
-        ]
-      },
-      "bias_1": {
-        "ports": [
-          "bias",
-          "WS_PE_0/psum"
+          "WS_PE_8/sys_clk"
         ]
       },
       "load_w_1": {
@@ -658,24 +769,6 @@
           "WS_PE_7/enable",
           "WS_PE_5/enable",
           "WS_PE_8/enable"
-        ]
-      },
-      "w0_1": {
-        "ports": [
-          "w0",
-          "WS_PE_0/win"
-        ]
-      },
-      "w2_1": {
-        "ports": [
-          "w2",
-          "WS_PE_2/win"
-        ]
-      },
-      "win_1": {
-        "ports": [
-          "w1",
-          "WS_PE_1/win"
         ]
       },
       "WS_PE_0_outp": {
@@ -712,72 +805,6 @@
         "ports": [
           "WS_PE_1/outp",
           "WS_PE_4/psum"
-        ]
-      },
-      "x1_1": {
-        "ports": [
-          "x1",
-          "WS_PE_0/xin"
-        ]
-      },
-      "psum2_1": {
-        "ports": [
-          "psum2",
-          "WS_PE_1/psum"
-        ]
-      },
-      "psum3_1": {
-        "ports": [
-          "psum3",
-          "WS_PE_2/psum"
-        ]
-      },
-      "x2_1": {
-        "ports": [
-          "x2",
-          "WS_PE_3/xin"
-        ]
-      },
-      "x3_1": {
-        "ports": [
-          "x3",
-          "WS_PE_6/xin"
-        ]
-      },
-      "w21_1": {
-        "ports": [
-          "w21",
-          "WS_PE_3/win"
-        ]
-      },
-      "w22_1": {
-        "ports": [
-          "w22",
-          "WS_PE_4/win"
-        ]
-      },
-      "w23_1": {
-        "ports": [
-          "w23",
-          "WS_PE_5/win"
-        ]
-      },
-      "w31_1": {
-        "ports": [
-          "w31",
-          "WS_PE_6/win"
-        ]
-      },
-      "w32_1": {
-        "ports": [
-          "w32",
-          "WS_PE_7/win"
-        ]
-      },
-      "w33_1": {
-        "ports": [
-          "w33",
-          "WS_PE_8/win"
         ]
       },
       "WS_PE_5_outp": {
@@ -847,6 +874,96 @@
         "ports": [
           "accum_0/Q",
           "Q"
+        ]
+      },
+      "w13_1": {
+        "ports": [
+          "w13",
+          "WS_PE_2/win"
+        ]
+      },
+      "psum3_1": {
+        "ports": [
+          "psum3",
+          "WS_PE_2/psum"
+        ]
+      },
+      "psum2_1": {
+        "ports": [
+          "psum2",
+          "WS_PE_1/psum"
+        ]
+      },
+      "w12_1": {
+        "ports": [
+          "w12",
+          "WS_PE_1/win"
+        ]
+      },
+      "w22_1": {
+        "ports": [
+          "w22",
+          "WS_PE_4/win"
+        ]
+      },
+      "x1_1": {
+        "ports": [
+          "x1",
+          "WS_PE_0/xin"
+        ]
+      },
+      "psum1_1": {
+        "ports": [
+          "psum1",
+          "WS_PE_0/psum"
+        ]
+      },
+      "w11_1": {
+        "ports": [
+          "w11",
+          "WS_PE_0/win"
+        ]
+      },
+      "x2_1": {
+        "ports": [
+          "x2",
+          "WS_PE_3/xin"
+        ]
+      },
+      "w21_1": {
+        "ports": [
+          "w21",
+          "WS_PE_3/win"
+        ]
+      },
+      "w23_1": {
+        "ports": [
+          "w23",
+          "WS_PE_5/win"
+        ]
+      },
+      "w32_1": {
+        "ports": [
+          "w32",
+          "WS_PE_7/win"
+        ]
+      },
+      "w33_1": {
+        "ports": [
+          "w33",
+          "WS_PE_8/win"
+        ]
+      },
+      "x3_1": {
+        "ports": [
+          "x3",
+          "WS_PE_6/xin"
+        ]
+      },
+      "w31_1": {
+        "ports": [
+          "w31",
+          "WS_PE_6/win"
         ]
       }
     }

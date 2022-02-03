@@ -22,19 +22,19 @@
 
 module accum (sys_clk, CLR, D1, D2, D3, Q); 
 input sys_clk, CLR; 
-input signed [7:0] D1; 
-input signed [7:0] D2; 
-input signed [7:0] D3; 
-output reg signed [7:0] Q; 
-reg    [7:0] tmp;  
+input signed [9:0] D1; 
+input signed [9:0] D2; 
+input signed [9:0] D3; 
+output reg signed [9:0] Q; 
+//reg    [7:0] tmp;  
 
   always @(posedge sys_clk or posedge CLR) 
     begin 
       if (CLR) 
-        Q = 8'b0000; 
+        Q = 10'b0000; 
       else 
         Q = D1+D2+D3; 
-        $display("%b + %b + %b = %b",D1,D2,D3,tmp);
+//        $display("%b + %b + %b = %b",D1,D2,D3,tmp);
     end 
 //  assign Q = tmp; 
 endmodule 
