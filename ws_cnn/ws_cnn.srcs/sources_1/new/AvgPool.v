@@ -36,7 +36,7 @@ always @ (posedge clk) begin
     if (en) begin
         //test negative case, does it overflow out
         inps = (inp1 + inp2 + inp3 + inp4);
-        
+        outp = inps*0.25;
     end
     else outp = 10'b0; //pull down to 0
 end

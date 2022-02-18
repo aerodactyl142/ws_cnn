@@ -42,7 +42,7 @@ always @ (rst) begin
     dout3 = 10'b0;
 end
 
-always @ (posedge clk) begin
+always @ (posedge clk & ~rst) begin
 if (en) begin
 //    $display(ImageMem[1]);
     if (addr1>0 && addr1<=MAX_IMG)

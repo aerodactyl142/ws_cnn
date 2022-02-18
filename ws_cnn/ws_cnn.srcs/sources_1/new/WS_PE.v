@@ -20,24 +20,24 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module WS_PE(
-    input signed [9:0] xin,
-    input signed [9:0] win,
-    input signed [9:0] psum,
+    input [9:0] xin,
+    input [9:0] win,
+    input [9:0] psum,
     input load_w,
     input sys_clk,
     input enable,
 //    input two_bit,
 //    input signed [1:0] twos,
-    output reg signed [9:0] outp,
-    output signed [9:0] f_inp
+    output reg [9:0] outp,
+    output reg [9:0] f_inp
     );
 //1 bit sign, 3 bits int, 6 bits fraction
-reg signed [9:0] weights;
+reg [9:0] weights;
 //wire signed [14:0] pout = xin*weights;
-reg signed [18:0] pout;
+(*dont_touch = "true"*) reg [18:0] pout;
 //reg signed [14:0] long_bias;
-reg signed [9:0] neg;
-
+(*dont_touch = "true"*) reg [9:0] neg;
+//(*dont_touch = "true"*)
 //always @ (*)
 //pout = weights * xin;
 localparam SF = 2.0**-6.0;  // Q3.6 scaling factor is 2^-6
@@ -105,9 +105,9 @@ if (enable) begin
 end
 end
 
-//always @ (negedge sys_clk) begin
-//if (enable)
-assign    f_inp = xin;
-//end
+always @ (negedge sys_clk) begin
+if (enable)
+  f_inp = xin;
+end
 
 endmodule
