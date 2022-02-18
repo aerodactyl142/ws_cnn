@@ -34,9 +34,9 @@ module WS_PE(
 //1 bit sign, 3 bits int, 6 bits fraction
 reg [9:0] weights;
 //wire signed [14:0] pout = xin*weights;
-(*dont_touch = "true"*) reg [18:0] pout;
+reg [18:0] pout;
 //reg signed [14:0] long_bias;
-(*dont_touch = "true"*) reg [9:0] neg;
+//(*dont_touch = "true"*) reg [9:0] neg;
 //(*dont_touch = "true"*)
 //always @ (*)
 //pout = weights * xin;
@@ -51,63 +51,78 @@ if (enable) begin
 //    forward = xin;
 //    if (load_w == 1'b1)
 //        weights = win;
-    if (xin == 10'b0)
+    if (xin == 10'b0) begin
         outp = psum;
-    else if (weights == 10'b0)
+        pout = 0;
+    end
+    else if (weights == 10'b0) begin
         outp = psum;
-    else if (psum[9] == 1'b0) begin //positive bias
-        if (weights[9] == 0 & xin[9] == 0) begin
-            pout = weights * xin;// + long_bias;// + long_bias;
-            outp = {pout[18], pout[14:6]} + psum; //19 bit back to 10 bits, to pick bits as required
-        end
-        else if (weights[9] == 1 & xin[9] == 1) begin
-            pout = -weights * -xin;
-            outp = {pout[18], pout[14:6]} + psum;
-        end
-        else if (weights[9] == 1 & xin[9] == 0) begin
-            pout = -weights * xin;
-            outp = {1'b1, pout[14:6]} + psum;
-        end
-        else if (weights[9] == 0 & xin[9] == 1) begin
-            pout = weights * -xin;
-            outp = {1'b1, pout[14:6]} + psum;
-        end
+        pout = 0;
+    end
+    else begin
+        pout = weights * xin;
+//        pout[18] = ;
+        if (weights[9] ^ xin[9])
+            pout = ~pout + 1; //change back to two's complement
+//        if (psum[9] == 1'b0)
+        outp = {pout[18], pout[14:6]} + psum; //19 bit back to 10 bits, to pick bits as required
+//        else
+//            outp = {pout[18], pout[14:6]} - psum[8:0]; //19 bit back to 10 bits, to pick bits as required
+    end
+//    else if (psum[9] == 1'b0) begin //positive bias
+//        if (weights[9] == 0 & xin[9] == 0) begin
+//            pout = weights * xin;// + long_bias;// + long_bias;
+//            outp = {pout[18], pout[14:6]} + psum; //19 bit back to 10 bits, to pick bits as required
+//        end
+//        else if (weights[9] == 1 & xin[9] == 1) begin
+//            pout = -weights * -xin;
+//            outp = {pout[18], pout[14:6]} + psum;
+//        end
+//        else if (weights[9] == 1 & xin[9] == 0) begin
+//            pout = -weights * xin;
+//            outp = {1'b1, pout[14:6]} + psum;
+//        end
+//        else if (weights[9] == 0 & xin[9] == 1) begin
+//            pout = weights * -xin;
+//            outp = {1'b1, pout[14:6]} + psum;
+//        end
 //        $display($time," %b * %b = %b, truncated to %b", weights, xin, pout, outp);
 //        $display(pout);
 //        $display("%f * %f = %f", (weights), (xin), (pout));
 //        outp = 8'b11111111;
 //        outp = tout; //both 8 bits
-    end
-    else if (psum[9] == 1'b1) begin //negative bias, to do 2's complement
-        neg = ~psum + 1;
-        if (weights[9] == 0 & xin[9] == 0) begin
-            pout = weights * xin;// + long_bias;// + long_bias;
-            outp = {pout[18], pout[14:6]} - neg; //19 bit back to 10 bits, to pick bits as required
-        end
-        else if (weights[9] == 1 & xin[9] == 1) begin
-            pout = -weights * -xin;
-            outp = {pout[18], pout[14:6]} -neg;
-        end
-        else if (weights[9] == 1 & xin[9] == 0) begin
-            pout = -weights * xin;
-            outp = {1'b1, pout[14:6]} -neg;
-        end
-        else if (weights[9] == 0 & xin[9] == 1) begin
-            pout = weights * -xin;
-            outp = {1'b1, pout[14:6]} -neg;
-        end
-//    $display("negative bias %b", psum);
+//    end
+//    else if (psum[9] == 1'b1) begin //negative bias, to do 2's complement
+////        neg = ~psum + 1;
+//        if (weights[9] == 0 & xin[9] == 0) begin
+//            pout = weights * xin;// + long_bias;// + long_bias;
+//            outp = {pout[18], pout[14:6]} - (~psum + 1); //19 bit back to 10 bits, to pick bits as required
+//        end
+//        else if (weights[9] == 1 & xin[9] == 1) begin
+//            pout = -weights * -xin;
+//            outp = {pout[18], pout[14:6]} - (~psum + 1);
+//        end
+//        else if (weights[9] == 1 & xin[9] == 0) begin
+//            pout = -weights * xin;
+//            outp = {1'b1, pout[14:6]} - (~psum + 1);
+//        end
+//        else if (weights[9] == 0 & xin[9] == 1) begin
+//            pout = weights * -xin;
+//            outp = {1'b1, pout[14:6]} - (~psum + 1);
+//        end
+////    $display("negative bias %b", psum);
         
-//        pout = weights * xin;// + long_bias;// + long_bias;
-//        outp = {pout[18], pout[14:6]} - neg; //19 bit back to 10 bits, to pick bits as required
-    end
+////        pout = weights * xin;// + long_bias;// + long_bias;
+////        outp = {pout[18], pout[14:6]} - neg; //19 bit back to 10 bits, to pick bits as required
+//    end
 //    $display(weights, xin, outp);
+    f_inp = xin;
 end
 end
 
-always @ (negedge sys_clk) begin
-if (enable)
-  f_inp = xin;
-end
+//always @ (negedge sys_clk) begin
+//if (enable)
+//  f_inp = xin;
+//end
 
 endmodule

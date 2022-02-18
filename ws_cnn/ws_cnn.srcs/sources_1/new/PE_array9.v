@@ -37,8 +37,8 @@ module PE_array9(
     input load_w,
     input en,
     input [9:0] psum1,
-    input [9:0] psum2,
-    input [9:0] psum3,
+//    input [9:0] psum2,
+//    input [9:0] psum3,
     input clr,
 //    output [9:0] outp1,
 //    output [9:0] outp2,
@@ -46,8 +46,9 @@ module PE_array9(
     output [9:0] acc_out
     );
 
-(* dont_touch = "true" *) wire [9:0] o11, o12, o13, o21,o22,o23,o31,o32,o33;
-(* dont_touch = "true" *) wire [9:0] fx11, fx12, fx21,fx22,fx31,fx32;
+reg [9:0] zero_bias = 10'b0;
+wire [9:0] o11, o12, o13, o21,o22,o23,o31,o32,o33;
+wire [9:0] fx11, fx12, fx21,fx22,fx31,fx32;
 //wire [7:0] acc_out;
 //wire [9:0] zero_bias; //, w31, w32, w33;
 //assign zero_bias = 10'b0;
@@ -60,8 +61,8 @@ module PE_array9(
 //assign outp3 = o33;
 
 WS_PE pe11(.psum(psum1), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w13), .xin(x1), .outp(o11), .f_inp(fx11));
-WS_PE pe12(.psum(psum2), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w12), .xin(fx11), .outp(o12), .f_inp(fx12));
-WS_PE pe13(.psum(psum3), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w11), .xin(fx12), .outp(o13));
+WS_PE pe12(.psum(zero_bias), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w12), .xin(fx11), .outp(o12), .f_inp(fx12));
+WS_PE pe13(.psum(zero_bias), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w11), .xin(fx12), .outp(o13));
 WS_PE pe21(.psum(o11), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w23), .xin(x2), .outp(o21), .f_inp(fx21));
 WS_PE pe22(.psum(o12), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w22), .xin(fx21), .outp(o22), .f_inp(fx22));
 WS_PE pe23(.psum(o13), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w21), .xin(fx22), .outp(o23));

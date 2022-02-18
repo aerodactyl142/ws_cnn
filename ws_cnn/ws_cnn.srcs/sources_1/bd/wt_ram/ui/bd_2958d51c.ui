@@ -1,6 +1,6 @@
 {
    ExpandedHierarchyInLayout: "",
-   guistr: "# # String gsaved with Nlview 6.8.5  2018-01-30 bk=1.4354 VDI=40 GEI=35 GUI=JA:1.6 non-TLS
+   guistr: "# # String gsaved with Nlview 6.8.5  2018-01-30 bk=1.4354 VDI=40 GEI=35 GUI=JA:1.6 non-TLS-threadsafe
 #  -string -flagsOSRD
 preplace port reset_rtl -pg 1 -y 60 -defaultsOSRD
 preplace port sys_clk -pg 1 -y 80 -defaultsOSRD
@@ -9,11 +9,11 @@ preplace inst clk_wiz -pg 1 -lvl 2 -y 70 -defaultsOSRD
 preplace inst ila_0 -pg 1 -lvl 5 -y 170 -defaultsOSRD
 preplace inst weight_RAM_0 -pg 1 -lvl 4 -y 90 -defaultsOSRD
 preplace netloc sys_clock_1 1 0 2 NJ 80 N
-preplace netloc vio_0_probe_out0 1 3 1 750
-preplace netloc weight_RAM_0_dout 1 4 1 990
-preplace netloc Net 1 3 2 740 -10 1010J
+preplace netloc vio_0_probe_out0 1 3 1 760
+preplace netloc weight_RAM_0_dout 1 4 1 N
+preplace netloc Net 1 3 2 740 240 1010J
 preplace netloc reset_rtl_1 1 0 2 N 60 N
-preplace netloc clk_wiz_clk_out1 1 2 3 520 30 750 0 1000
+preplace netloc clk_wiz_clk_out1 1 2 3 520 30 750 250 1000
 levelinfo -pg 1 -10 170 430 640 880 1120 1230 -top -330 -bot 310
 ",
 }

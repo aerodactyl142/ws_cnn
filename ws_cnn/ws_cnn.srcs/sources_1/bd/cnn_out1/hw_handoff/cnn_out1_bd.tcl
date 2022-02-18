@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-# cnn
+# DFF, PE_array9, comp3, comp3, comp3, comp3, controller, counter, data_in, weight_RAM
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -165,59 +165,158 @@ proc create_root_design { parentCell } {
   # Create interface ports
 
   # Create ports
+  set acc_out [ create_bd_port -dir O -from 9 -to 0 acc_out ]
   set en [ create_bd_port -dir I en ]
-  set reset_rtl [ create_bd_port -dir I -type rst reset_rtl ]
-  set_property -dict [ list \
-   CONFIG.POLARITY {ACTIVE_HIGH} \
- ] $reset_rtl
   set sys_clk [ create_bd_port -dir I -type clk sys_clk ]
   set_property -dict [ list \
    CONFIG.FREQ_HZ {125000000} \
  ] $sys_clk
 
-  # Create instance: clk_wiz_0, and set properties
-  set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_0 ]
-  set_property -dict [ list \
-   CONFIG.CLKIN1_JITTER_PS {80.0} \
-   CONFIG.CLKOUT1_JITTER {270.480} \
-   CONFIG.CLKOUT1_PHASE_ERROR {234.843} \
-   CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {30} \
-   CONFIG.CLK_IN1_BOARD_INTERFACE {sys_clock} \
-   CONFIG.MMCM_CLKFBOUT_MULT_F {39.750} \
-   CONFIG.MMCM_CLKIN1_PERIOD {8.000} \
-   CONFIG.MMCM_CLKOUT0_DIVIDE_F {33.125} \
-   CONFIG.MMCM_DIVCLK_DIVIDE {5} \
- ] $clk_wiz_0
-
-  # Create instance: cnn_0, and set properties
-  set block_name cnn
-  set block_cell_name cnn_0
-  if { [catch {set cnn_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+  # Create instance: DFF_0, and set properties
+  set block_name DFF
+  set block_cell_name DFF_0
+  if { [catch {set DFF_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
      catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
-   } elseif { $cnn_0 eq "" } {
+   } elseif { $DFF_0 eq "" } {
      catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
   
-  # Create instance: ila_0, and set properties
-  set ila_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_0 ]
-  set_property -dict [ list \
-   CONFIG.C_ENABLE_ILA_AXI_MON {false} \
-   CONFIG.C_MONITOR_TYPE {Native} \
-   CONFIG.C_NUM_OF_PROBES {1} \
-   CONFIG.C_PROBE0_WIDTH {10} \
-   CONFIG.C_PROBE1_WIDTH {1} \
-   CONFIG.C_PROBE2_WIDTH {1} \
-   CONFIG.C_PROBE3_WIDTH {1} \
- ] $ila_0
-
+  # Create instance: PE_array9_0, and set properties
+  set block_name PE_array9
+  set block_cell_name PE_array9_0
+  if { [catch {set PE_array9_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $PE_array9_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: comp3_0, and set properties
+  set block_name comp3
+  set block_cell_name comp3_0
+  if { [catch {set comp3_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $comp3_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: comp3_1, and set properties
+  set block_name comp3
+  set block_cell_name comp3_1
+  if { [catch {set comp3_1 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $comp3_1 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: comp3_2, and set properties
+  set block_name comp3
+  set block_cell_name comp3_2
+  if { [catch {set comp3_2 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $comp3_2 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: comp3_3, and set properties
+  set block_name comp3
+  set block_cell_name comp3_3
+  if { [catch {set comp3_3 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $comp3_3 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: controller_0, and set properties
+  set block_name controller
+  set block_cell_name controller_0
+  if { [catch {set controller_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $controller_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: counter_0, and set properties
+  set block_name counter
+  set block_cell_name counter_0
+  if { [catch {set counter_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $counter_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: data_in_0, and set properties
+  set block_name data_in
+  set block_cell_name data_in_0
+  if { [catch {set data_in_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $data_in_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: weight_RAM_0, and set properties
+  set block_name weight_RAM
+  set block_cell_name weight_RAM_0
+  if { [catch {set weight_RAM_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $weight_RAM_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create port connections
-  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins cnn_0/sys_clk] [get_bd_pins ila_0/clk]
-  connect_bd_net -net cnn_0_outpt [get_bd_pins cnn_0/outpt] [get_bd_pins ila_0/probe0]
-  connect_bd_net -net en_1 [get_bd_ports en] [get_bd_pins cnn_0/en]
-  connect_bd_net -net reset_rtl_1 [get_bd_ports reset_rtl] [get_bd_pins clk_wiz_0/reset]
-  connect_bd_net -net sys_clk_1 [get_bd_ports sys_clk] [get_bd_pins clk_wiz_0/clk_in1]
+  connect_bd_net -net PE_array9_0_acc_out [get_bd_ports acc_out] [get_bd_pins PE_array9_0/acc_out]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_ports sys_clk] [get_bd_pins DFF_0/clk] [get_bd_pins PE_array9_0/sys_clk] [get_bd_pins comp3_0/sys_clk] [get_bd_pins comp3_1/sys_clk] [get_bd_pins comp3_2/sys_clk] [get_bd_pins comp3_3/sys_clk] [get_bd_pins controller_0/sys_clk] [get_bd_pins counter_0/clk] [get_bd_pins data_in_0/sys_clk] [get_bd_pins weight_RAM_0/clk]
+  connect_bd_net -net comp3_0_outp1 [get_bd_pins PE_array9_0/x1] [get_bd_pins comp3_0/outp1]
+  connect_bd_net -net comp3_0_outp2 [get_bd_pins PE_array9_0/x2] [get_bd_pins comp3_0/outp2]
+  connect_bd_net -net comp3_0_outp3 [get_bd_pins PE_array9_0/x3] [get_bd_pins comp3_0/outp3]
+  connect_bd_net -net comp3_1_outp1 [get_bd_pins PE_array9_0/w11] [get_bd_pins comp3_1/outp1]
+  connect_bd_net -net comp3_1_outp2 [get_bd_pins PE_array9_0/w12] [get_bd_pins comp3_1/outp2]
+  connect_bd_net -net comp3_1_outp3 [get_bd_pins PE_array9_0/w13] [get_bd_pins comp3_1/outp3]
+  connect_bd_net -net comp3_2_outp1 [get_bd_pins PE_array9_0/w21] [get_bd_pins comp3_2/outp1]
+  connect_bd_net -net comp3_2_outp2 [get_bd_pins PE_array9_0/w22] [get_bd_pins comp3_2/outp2]
+  connect_bd_net -net comp3_2_outp3 [get_bd_pins PE_array9_0/w23] [get_bd_pins comp3_2/outp3]
+  connect_bd_net -net comp3_3_outp1 [get_bd_pins PE_array9_0/w31] [get_bd_pins comp3_3/outp1]
+  connect_bd_net -net comp3_3_outp2 [get_bd_pins PE_array9_0/w32] [get_bd_pins comp3_3/outp2]
+  connect_bd_net -net comp3_3_outp3 [get_bd_pins PE_array9_0/w33] [get_bd_pins comp3_3/outp3]
+  connect_bd_net -net controller_0_addra [get_bd_pins controller_0/addra] [get_bd_pins weight_RAM_0/addra]
+  connect_bd_net -net controller_0_addrb [get_bd_pins controller_0/addrb] [get_bd_pins weight_RAM_0/addrb]
+  connect_bd_net -net controller_0_load_w [get_bd_pins PE_array9_0/load_w] [get_bd_pins controller_0/load_w]
+  connect_bd_net -net controller_0_rst [get_bd_pins PE_array9_0/clr] [get_bd_pins controller_0/rst] [get_bd_pins counter_0/rst] [get_bd_pins data_in_0/rst] [get_bd_pins weight_RAM_0/rst]
+  connect_bd_net -net counter_0_count [get_bd_pins controller_0/count] [get_bd_pins counter_0/count]
+  connect_bd_net -net data_in_0_x1 [get_bd_pins comp3_0/inp1] [get_bd_pins data_in_0/x1]
+  connect_bd_net -net data_in_0_x2 [get_bd_pins comp3_0/inp2] [get_bd_pins data_in_0/x2]
+  connect_bd_net -net data_in_0_x3 [get_bd_pins comp3_0/inp3] [get_bd_pins data_in_0/x3]
+  connect_bd_net -net en_1 [get_bd_pins DFF_0/Q] [get_bd_pins PE_array9_0/en] [get_bd_pins comp3_0/en] [get_bd_pins comp3_1/en] [get_bd_pins comp3_2/en] [get_bd_pins comp3_3/en] [get_bd_pins controller_0/en] [get_bd_pins counter_0/en] [get_bd_pins data_in_0/en] [get_bd_pins weight_RAM_0/en]
+  connect_bd_net -net en_2 [get_bd_ports en] [get_bd_pins DFF_0/D]
+  connect_bd_net -net weight_RAM_0_bias [get_bd_pins PE_array9_0/psum1] [get_bd_pins weight_RAM_0/bias]
+  connect_bd_net -net weight_RAM_0_w11 [get_bd_pins comp3_1/inp1] [get_bd_pins weight_RAM_0/w11]
+  connect_bd_net -net weight_RAM_0_w12 [get_bd_pins comp3_1/inp2] [get_bd_pins weight_RAM_0/w12]
+  connect_bd_net -net weight_RAM_0_w13 [get_bd_pins comp3_1/inp3] [get_bd_pins weight_RAM_0/w13]
+  connect_bd_net -net weight_RAM_0_w21 [get_bd_pins comp3_2/inp1] [get_bd_pins weight_RAM_0/w21]
+  connect_bd_net -net weight_RAM_0_w22 [get_bd_pins comp3_2/inp2] [get_bd_pins weight_RAM_0/w22]
+  connect_bd_net -net weight_RAM_0_w23 [get_bd_pins comp3_2/inp3] [get_bd_pins weight_RAM_0/w23]
+  connect_bd_net -net weight_RAM_0_w31 [get_bd_pins comp3_3/inp1] [get_bd_pins weight_RAM_0/w31]
+  connect_bd_net -net weight_RAM_0_w32 [get_bd_pins comp3_3/inp2] [get_bd_pins weight_RAM_0/w32]
+  connect_bd_net -net weight_RAM_0_w33 [get_bd_pins comp3_3/inp3] [get_bd_pins weight_RAM_0/w33]
 
   # Create address segments
 

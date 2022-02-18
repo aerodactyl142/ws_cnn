@@ -2,26 +2,38 @@
 <Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="cnn_out1" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1645195844"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1645195844"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1645195844"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1645195844"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1645206073"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1645206073"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1645206073"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1645206073"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
-      <File Name="ip\cnn_out1_cnn_0_0\cnn_out1_cnn_0_0.xci" Type="IP">
-        <Instance HierarchyPath="cnn_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+      <File Name="cnn_out1_sim_netlist.vhdl" Type="VHDL">
+        <Properties IsEditable="true" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
+        <UsedIn Val="SINGLE_LANGUAGE"/>
       </File>
-      <File Name="ip\cnn_out1_ila_0_0\cnn_out1_ila_0_0.xci" Type="IP">
-        <Instance HierarchyPath="ila_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+      <File Name="cnn_out1_sim_netlist.v" Type="Verilog">
+        <Properties IsEditable="true" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="false"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SIMULATION"/>
+        <UsedIn Val="SINGLE_LANGUAGE"/>
+      </File>
+      <File Name="cnn_out1_stub.vhdl" Type="VHDL">
+        <Properties IsEditable="true" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="false"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTH_BLACKBOX_STUB"/>
+      </File>
+      <File Name="cnn_out1_stub.v" Type="Verilog">
+        <Properties IsEditable="true" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="false"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTH_BLACKBOX_STUB"/>
+      </File>
+      <File Name="cnn_out1.dcp" Type="DCP">
+        <Properties IsEditable="true" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
         <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
       </File>
       <File Name="synth\cnn_out1.v" Type="Verilog">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
@@ -34,8 +46,80 @@
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip\cnn_out1_clk_wiz_0_0\cnn_out1_clk_wiz_0_0.xci" Type="IP">
-        <Instance HierarchyPath="clk_wiz_0"/>
+      <File Name="ip\cnn_out1_counter_0_0\cnn_out1_counter_0_0.xci" Type="IP">
+        <Instance HierarchyPath="counter_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\cnn_out1_controller_0_0\cnn_out1_controller_0_0.xci" Type="IP">
+        <Instance HierarchyPath="controller_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\cnn_out1_weight_RAM_0_0\cnn_out1_weight_RAM_0_0.xci" Type="IP">
+        <Instance HierarchyPath="weight_RAM_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\cnn_out1_data_in_0_0\cnn_out1_data_in_0_0.xci" Type="IP">
+        <Instance HierarchyPath="data_in_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\cnn_out1_PE_array9_0_0\cnn_out1_PE_array9_0_0.xci" Type="IP">
+        <Instance HierarchyPath="PE_array9_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\cnn_out1_DFF_0_0\cnn_out1_DFF_0_0.xci" Type="IP">
+        <Instance HierarchyPath="DFF_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\cnn_out1_comp3_0_0\cnn_out1_comp3_0_0.xci" Type="IP">
+        <Instance HierarchyPath="comp3_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\cnn_out1_comp3_0_1\cnn_out1_comp3_0_1.xci" Type="IP">
+        <Instance HierarchyPath="comp3_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\cnn_out1_comp3_0_2\cnn_out1_comp3_0_2.xci" Type="IP">
+        <Instance HierarchyPath="comp3_2"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\cnn_out1_comp3_0_3\cnn_out1_comp3_0_3.xci" Type="IP">
+        <Instance HierarchyPath="comp3_3"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>

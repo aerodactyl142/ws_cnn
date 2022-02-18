@@ -24,17 +24,49 @@ module weight_RAM(
     input clk,
     input en,
     input rst,
-    input [7:0] addr,
-    output reg [9:0] dout
+    input [15:0] addra, //weight start addr
+    input [15:0] addrb, //bias addr
+    output reg [9:0] w11,
+    output reg [9:0] w12,
+    output reg [9:0] w13,
+    output reg [9:0] w21,
+    output reg [9:0] w22,
+    output reg [9:0] w23,
+    output reg [9:0] w31,
+    output reg [9:0] w32,
+    output reg [9:0] w33,
+    output reg [9:0] bias
     );
 
+parameter [2:0] kernel_size = 3;
 parameter MAX_WGT = 77;
 reg [7:0] WeightMem [1:MAX_WGT];
 initial $readmemb("test_wt10v2.dat",WeightMem);
 
 always @ (posedge clk) begin
     if (en) begin
-        dout = {WeightMem[addr][7], 2'b0, WeightMem[addr][6:0]}; //for 9 bit data, dout = WeightMem[addr]
+        w13 = {WeightMem[addra][7], 2'b0, WeightMem[addra][6:0]}; //for 9 bit data, dout = WeightMem[addr]
+        w12 = {WeightMem[addra+1][7], 2'b0, WeightMem[addra+1][6:0]};
+        w11 = {WeightMem[addra+2][7], 2'b0, WeightMem[addra+2][6:0]};
+        w23 = {WeightMem[addra+kernel_size][7], 2'b0, WeightMem[addra+kernel_size][6:0]};
+        w22 = {WeightMem[addra+kernel_size+1][7], 2'b0, WeightMem[addra+kernel_size+1][6:0]};
+        w21 = {WeightMem[addra+kernel_size+2][7], 2'b0, WeightMem[addra+kernel_size+2][6:0]};
+        w33 = {WeightMem[addra+kernel_size*2][7], 2'b0, WeightMem[addra+kernel_size*2][6:0]};
+        w32 = {WeightMem[addra+kernel_size*2+1][7], 2'b0, WeightMem[addra+kernel_size*2+1][6:0]};
+        w31 = {WeightMem[addra+kernel_size*2+2][7], 2'b0, WeightMem[addra+kernel_size*2+2][6:0]};
+        bias = {WeightMem[addrb][7], 2'b0, WeightMem[addrb][6:0]};
+    end
+    else begin
+        w13 = 10'b0;
+        w12 = 10'b0;
+        w11 = 10'b0;
+        w21 = 10'b0;
+        w22 = 10'b0;
+        w23 = 10'b0;
+        w31 = 10'b0;
+        w32 = 10'b0;
+        w33 = 10'b0;
+        bias = 10'b0;
     end
 //    if (rst) begin
 //        dout = 10'b0;

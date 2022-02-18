@@ -19,16 +19,17 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-//dont really need this file...
-
 module complement(
+    input sys_clk,
+    input en,
     input [9:0] inp,
     output reg [9:0] outp
     );
 //http://www.referencedesigner.com/tutorials/verilog/verilog_58.php
 initial begin
     if (outp[9] == 1'b1)
-        outp = -inp;
+        outp = ~inp + 1; //negate and plus 1
+        outp[9] = 1; //retain to show negative
 end
 
 endmodule

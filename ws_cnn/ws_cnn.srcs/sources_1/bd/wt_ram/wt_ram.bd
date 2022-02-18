@@ -157,11 +157,9 @@
         <spirit:name>Net</spirit:name>
         <spirit:internalPortReference spirit:componentRef="vio_0" spirit:portRef="probe_out1"/>
         <spirit:internalPortReference spirit:componentRef="ila_0" spirit:portRef="probe0"/>
-        <spirit:internalPortReference spirit:componentRef="weight_RAM_0" spirit:portRef="addr"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>weight_RAM_0_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="weight_RAM_0" spirit:portRef="dout"/>
         <spirit:internalPortReference spirit:componentRef="ila_0" spirit:portRef="probe1"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>

@@ -23,10 +23,12 @@
 module counter(
     input clk,
     input en,
-    input [7:0] max_count,
+//    input [7:0] max_count,
     input rst,
-    output [7:0] count
+    output [9:0] count
     );
+
+reg [9:0] max_count = 1023;
 
 reg [7:0] ticktock = 8'b0;
 

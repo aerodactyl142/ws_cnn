@@ -36,14 +36,19 @@ parameter MAX_IMG = 100;
 reg [7:0] ImageMem [1:MAX_IMG];
 initial $readmemb("test_data10v2.dat",ImageMem);
 
-always @ (rst) begin
+//always @ (rst) begin
+//    dout1 = 10'b0;
+//    dout2 = 10'b0;
+//    dout3 = 10'b0;
+//end
+
+always @ (posedge clk or posedge rst) begin
+if (rst) begin
     dout1 = 10'b0;
     dout2 = 10'b0;
     dout3 = 10'b0;
 end
-
-always @ (posedge clk & ~rst) begin
-if (en) begin
+else if (en) begin
 //    $display(ImageMem[1]);
     if (addr1>0 && addr1<=MAX_IMG)
         dout1 = {ImageMem[addr1][7], 2'b0, ImageMem[addr1][6:0]}; //for 9 bit data, dout = WeightMem[addr]
