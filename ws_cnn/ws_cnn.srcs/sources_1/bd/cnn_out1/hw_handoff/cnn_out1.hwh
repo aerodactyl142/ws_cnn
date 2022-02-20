@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sat Feb 19 01:41:13 2022" VIVADOVERSION="2018.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Feb 20 11:04:12 2022" VIVADOVERSION="2018.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="tul.com.tw:pynq-z2:part0:1.0" DEVICE="7z020" NAME="cnn_out1" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -7,25 +7,34 @@
     <PORT CLKFREQUENCY="125000000" DIR="I" NAME="sys_clk" SIGIS="clk" SIGNAME="External_Ports_sys_clk">
       <CONNECTIONS>
         <CONNECTION INSTANCE="counter_0" PORT="clk"/>
-        <CONNECTION INSTANCE="controller_0" PORT="sys_clk"/>
-        <CONNECTION INSTANCE="weight_RAM_0" PORT="clk"/>
-        <CONNECTION INSTANCE="DFF_0" PORT="clk"/>
-        <CONNECTION INSTANCE="data_in_0" PORT="sys_clk"/>
         <CONNECTION INSTANCE="PE_array9_0" PORT="sys_clk"/>
+        <CONNECTION INSTANCE="DFF_0" PORT="clk"/>
+        <CONNECTION INSTANCE="DFF_2" PORT="clk"/>
+        <CONNECTION INSTANCE="DFF_1" PORT="clk"/>
+        <CONNECTION INSTANCE="weight_RAM_0" PORT="clk"/>
         <CONNECTION INSTANCE="comp3_0" PORT="sys_clk"/>
         <CONNECTION INSTANCE="comp3_1" PORT="sys_clk"/>
         <CONNECTION INSTANCE="comp3_2" PORT="sys_clk"/>
         <CONNECTION INSTANCE="comp3_3" PORT="sys_clk"/>
+        <CONNECTION INSTANCE="image_RAM_0" PORT="sys_clk"/>
+        <CONNECTION INSTANCE="controller_0" PORT="sys_clk"/>
+        <CONNECTION INSTANCE="OBUF_0" PORT="sys_clk"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="External_Ports_en">
       <CONNECTIONS>
         <CONNECTION INSTANCE="DFF_0" PORT="D"/>
+        <CONNECTION INSTANCE="DFF_0" PORT="en"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="9" NAME="acc_out" RIGHT="0" SIGIS="undef" SIGNAME="PE_array9_0_acc_out">
+    <PORT DIR="I" NAME="rst" SIGIS="undef" SIGNAME="External_Ports_rst">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="PE_array9_0" PORT="acc_out"/>
+        <CONNECTION INSTANCE="DFF_2" PORT="D"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="9" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="OBUF_0_dpo">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="OBUF_0" PORT="dpo"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -40,7 +49,7 @@
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
-        <PORT DIR="I" NAME="D" SIGIS="undef" SIGNAME="External_Ports_en">
+        <PORT DIR="I" LEFT="9" NAME="D" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_en">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="en"/>
           </CONNECTIONS>
@@ -50,17 +59,121 @@
             <CONNECTION INSTANCE="External_Ports" PORT="sys_clk"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="Q" SIGIS="undef" SIGNAME="DFF_0_Q">
+        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="External_Ports_en">
           <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="en"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="9" NAME="Q" RIGHT="0" SIGIS="undef" SIGNAME="DFF_0_Q">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="DFF_1" PORT="en"/>
             <CONNECTION INSTANCE="counter_0" PORT="en"/>
-            <CONNECTION INSTANCE="controller_0" PORT="en"/>
-            <CONNECTION INSTANCE="weight_RAM_0" PORT="en"/>
-            <CONNECTION INSTANCE="data_in_0" PORT="en"/>
+            <CONNECTION INSTANCE="DFF_2" PORT="en"/>
             <CONNECTION INSTANCE="PE_array9_0" PORT="en"/>
-            <CONNECTION INSTANCE="comp3_0" PORT="en"/>
-            <CONNECTION INSTANCE="comp3_1" PORT="en"/>
-            <CONNECTION INSTANCE="comp3_2" PORT="en"/>
-            <CONNECTION INSTANCE="comp3_3" PORT="en"/>
+            <CONNECTION INSTANCE="controller_0" PORT="en"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/DFF_1" HWVERSION="1.0" INSTANCE="DFF_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="DFF" VLNV="xilinx.com:module_ref:DFF:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="cnn_out1_DFF_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="9" NAME="D" RIGHT="0" SIGIS="undef" SIGNAME="weight_RAM_0_bias">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="weight_RAM_0" PORT="bias"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="125000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_sys_clk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="sys_clk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="DFF_0_Q">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="9" NAME="Q" RIGHT="0" SIGIS="undef" SIGNAME="DFF_1_Q">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PE_array9_0" PORT="psum1"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/DFF_2" HWVERSION="1.0" INSTANCE="DFF_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="DFF" VLNV="xilinx.com:module_ref:DFF:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="cnn_out1_DFF_0_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="9" NAME="D" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_rst">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="rst"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="125000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_sys_clk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="sys_clk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="DFF_0_Q">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="9" NAME="Q" RIGHT="0" SIGIS="undef" SIGNAME="DFF_2_Q">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="controller_0" PORT="rst"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/OBUF_0" HWVERSION="1.0" INSTANCE="OBUF_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="OBUF" VLNV="xilinx.com:module_ref:OBUF:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="MAX_IMG" VALUE="784"/>
+        <PARAMETER NAME="Component_Name" VALUE="cnn_out1_OBUF_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="125000000" DIR="I" NAME="sys_clk" SIGIS="clk" SIGNAME="External_Ports_sys_clk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="sys_clk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="we" SIGIS="undef" SIGNAME="controller_0_we_obuf">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="controller_0" PORT="we_obuf"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="rd" SIGIS="undef"/>
+        <PORT DIR="I" LEFT="9" NAME="addr" RIGHT="0" SIGIS="undef" SIGNAME="controller_0_addro">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="controller_0" PORT="addro"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="9" NAME="rd_addr" RIGHT="0" SIGIS="undef" SIGNAME="controller_0_rd_obuf">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="controller_0" PORT="rd_obuf"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="9" NAME="di" RIGHT="0" SIGIS="undef" SIGNAME="PE_array9_0_acc_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PE_array9_0" PORT="acc_out"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="9" NAME="spo" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" LEFT="9" NAME="dpo" RIGHT="0" SIGIS="undef" SIGNAME="OBUF_0_dpo">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="dout"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -148,19 +261,23 @@
             <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="9" NAME="psum1" RIGHT="0" SIGIS="undef" SIGNAME="weight_RAM_0_bias">
+        <PORT DIR="I" LEFT="9" NAME="psum1" RIGHT="0" SIGIS="undef" SIGNAME="DFF_1_Q">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="weight_RAM_0" PORT="bias"/>
+            <CONNECTION INSTANCE="DFF_1" PORT="Q"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="clr" SIGIS="undef" SIGNAME="controller_0_rst">
+        <PORT DIR="I" NAME="clr" SIGIS="undef" SIGNAME="controller_0_clr">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="controller_0" PORT="rst"/>
+            <CONNECTION INSTANCE="controller_0" PORT="clr"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="O" LEFT="9" NAME="outp1" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" LEFT="9" NAME="outp2" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" LEFT="9" NAME="outp3" RIGHT="0" SIGIS="undef"/>
         <PORT DIR="O" LEFT="9" NAME="acc_out" RIGHT="0" SIGIS="undef" SIGNAME="PE_array9_0_acc_out">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="acc_out"/>
+            <CONNECTION INSTANCE="controller_0" PORT="acc_out"/>
+            <CONNECTION INSTANCE="OBUF_0" PORT="di"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -178,24 +295,24 @@
             <CONNECTION INSTANCE="External_Ports" PORT="sys_clk"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="DFF_0_Q">
+        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="controller_0_en_din">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
+            <CONNECTION INSTANCE="controller_0" PORT="en_din"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="9" NAME="inp1" RIGHT="0" SIGIS="undef" SIGNAME="data_in_0_x1">
+        <PORT DIR="I" LEFT="9" NAME="inp1" RIGHT="0" SIGIS="undef" SIGNAME="image_RAM_0_x1">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="data_in_0" PORT="x1"/>
+            <CONNECTION INSTANCE="image_RAM_0" PORT="x1"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="9" NAME="inp2" RIGHT="0" SIGIS="undef" SIGNAME="data_in_0_x2">
+        <PORT DIR="I" LEFT="9" NAME="inp2" RIGHT="0" SIGIS="undef" SIGNAME="image_RAM_0_x2">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="data_in_0" PORT="x2"/>
+            <CONNECTION INSTANCE="image_RAM_0" PORT="x2"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="9" NAME="inp3" RIGHT="0" SIGIS="undef" SIGNAME="data_in_0_x3">
+        <PORT DIR="I" LEFT="9" NAME="inp3" RIGHT="0" SIGIS="undef" SIGNAME="image_RAM_0_x3">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="data_in_0" PORT="x3"/>
+            <CONNECTION INSTANCE="image_RAM_0" PORT="x3"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="9" NAME="outp1" RIGHT="0" SIGIS="undef" SIGNAME="comp3_0_outp1">
@@ -228,9 +345,9 @@
             <CONNECTION INSTANCE="External_Ports" PORT="sys_clk"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="DFF_0_Q">
+        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="controller_0_en_win">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
+            <CONNECTION INSTANCE="controller_0" PORT="en_win"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="9" NAME="inp1" RIGHT="0" SIGIS="undef" SIGNAME="weight_RAM_0_w11">
@@ -278,9 +395,9 @@
             <CONNECTION INSTANCE="External_Ports" PORT="sys_clk"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="DFF_0_Q">
+        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="controller_0_en_win">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
+            <CONNECTION INSTANCE="controller_0" PORT="en_win"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="9" NAME="inp1" RIGHT="0" SIGIS="undef" SIGNAME="weight_RAM_0_w21">
@@ -328,9 +445,9 @@
             <CONNECTION INSTANCE="External_Ports" PORT="sys_clk"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="DFF_0_Q">
+        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="controller_0_en_win">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
+            <CONNECTION INSTANCE="controller_0" PORT="en_win"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="9" NAME="inp1" RIGHT="0" SIGIS="undef" SIGNAME="weight_RAM_0_w31">
@@ -369,6 +486,12 @@
     <MODULE FULLNAME="/controller_0" HWVERSION="1.0" INSTANCE="controller_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="controller" VLNV="xilinx.com:module_ref:controller:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
+        <PARAMETER NAME="n" VALUE="1"/>
+        <PARAMETER NAME="setup" VALUE="10"/>
+        <PARAMETER NAME="layer_step" VALUE="8"/>
+        <PARAMETER NAME="gap" VALUE="5"/>
+        <PARAMETER NAME="OUT_DIM" VALUE="8"/>
+        <PARAMETER NAME="MAX_COUNT" VALUE="114"/>
         <PARAMETER NAME="Component_Name" VALUE="cnn_out1_controller_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -383,22 +506,58 @@
             <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="rst" SIGIS="rst" SIGNAME="DFF_2_Q">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="DFF_2" PORT="Q"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="I" LEFT="9" NAME="count" RIGHT="0" SIGIS="undef" SIGNAME="counter_0_count">
           <CONNECTIONS>
             <CONNECTION INSTANCE="counter_0" PORT="count"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="rst" SIGIS="rst" SIGNAME="controller_0_rst">
+        <PORT DIR="I" LEFT="9" NAME="acc_out" RIGHT="0" SIGIS="undef" SIGNAME="PE_array9_0_acc_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PE_array9_0" PORT="acc_out"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="rst_win" SIGIS="undef" SIGNAME="controller_0_rst_win">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="weight_RAM_0" PORT="rst"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="en_win" SIGIS="undef" SIGNAME="controller_0_en_win">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="weight_RAM_0" PORT="en"/>
+            <CONNECTION INSTANCE="comp3_1" PORT="en"/>
+            <CONNECTION INSTANCE="comp3_2" PORT="en"/>
+            <CONNECTION INSTANCE="comp3_3" PORT="en"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="en_din" SIGIS="undef" SIGNAME="controller_0_en_din">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="comp3_0" PORT="en"/>
+            <CONNECTION INSTANCE="image_RAM_0" PORT="en"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="rst_din" SIGIS="undef" SIGNAME="controller_0_rst_din">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="image_RAM_0" PORT="rst"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="rst_count" SIGIS="undef" SIGNAME="controller_0_rst_count">
           <CONNECTIONS>
             <CONNECTION INSTANCE="counter_0" PORT="rst"/>
-            <CONNECTION INSTANCE="weight_RAM_0" PORT="rst"/>
-            <CONNECTION INSTANCE="data_in_0" PORT="rst"/>
-            <CONNECTION INSTANCE="PE_array9_0" PORT="clr"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="load_w" SIGIS="undef" SIGNAME="controller_0_load_w">
           <CONNECTIONS>
             <CONNECTION INSTANCE="PE_array9_0" PORT="load_w"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="clr" SIGIS="undef" SIGNAME="controller_0_clr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="PE_array9_0" PORT="clr"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="15" NAME="addra" RIGHT="0" SIGIS="undef" SIGNAME="controller_0_addra">
@@ -411,6 +570,24 @@
             <CONNECTION INSTANCE="weight_RAM_0" PORT="addrb"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="O" NAME="en_act" SIGIS="undef"/>
+        <PORT DIR="O" NAME="rst_act" SIGIS="undef"/>
+        <PORT DIR="O" NAME="we_obuf" SIGIS="undef" SIGNAME="controller_0_we_obuf">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="OBUF_0" PORT="we"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="rd_obuf" SIGIS="undef" SIGNAME="controller_0_rd_obuf">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="OBUF_0" PORT="rd_addr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="9" NAME="addro" RIGHT="0" SIGIS="undef" SIGNAME="controller_0_addro">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="OBUF_0" PORT="addr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="9" NAME="addr_rd" RIGHT="0" SIGIS="undef"/>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
@@ -431,9 +608,9 @@
             <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="rst" SIGIS="rst" SIGNAME="controller_0_rst">
+        <PORT DIR="I" NAME="rst" SIGIS="rst" SIGNAME="controller_0_rst_count">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="controller_0" PORT="rst"/>
+            <CONNECTION INSTANCE="controller_0" PORT="rst_count"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="9" NAME="count" RIGHT="0" SIGIS="undef" SIGNAME="counter_0_count">
@@ -444,13 +621,15 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
-    <MODULE FULLNAME="/data_in_0" HWVERSION="1.0" INSTANCE="data_in_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="data_in" VLNV="xilinx.com:module_ref:data_in:1.0">
+    <MODULE FULLNAME="/image_RAM_0" HWVERSION="1.0" INSTANCE="image_RAM_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="image_RAM" VLNV="xilinx.com:module_ref:image_RAM:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
+        <PARAMETER NAME="MAX_IMG" VALUE="100"/>
         <PARAMETER NAME="IMG_WIDTH" VALUE="10"/>
         <PARAMETER NAME="kernel_size" VALUE="3"/>
         <PARAMETER NAME="PE_SIZE" VALUE="9"/>
-        <PARAMETER NAME="Component_Name" VALUE="cnn_out1_data_in_0_0"/>
+        <PARAMETER NAME="MAX_ADDR" VALUE="100"/>
+        <PARAMETER NAME="Component_Name" VALUE="cnn_out1_image_RAM_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -459,27 +638,27 @@
             <CONNECTION INSTANCE="External_Ports" PORT="sys_clk"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="DFF_0_Q">
+        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="controller_0_en_din">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
+            <CONNECTION INSTANCE="controller_0" PORT="en_din"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="rst" SIGIS="rst" SIGNAME="controller_0_rst">
+        <PORT DIR="I" NAME="rst" SIGIS="rst" SIGNAME="controller_0_rst_din">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="controller_0" PORT="rst"/>
+            <CONNECTION INSTANCE="controller_0" PORT="rst_din"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="9" NAME="x1" RIGHT="0" SIGIS="undef" SIGNAME="data_in_0_x1">
+        <PORT DIR="O" LEFT="9" NAME="x1" RIGHT="0" SIGIS="undef" SIGNAME="image_RAM_0_x1">
           <CONNECTIONS>
             <CONNECTION INSTANCE="comp3_0" PORT="inp1"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="9" NAME="x2" RIGHT="0" SIGIS="undef" SIGNAME="data_in_0_x2">
+        <PORT DIR="O" LEFT="9" NAME="x2" RIGHT="0" SIGIS="undef" SIGNAME="image_RAM_0_x2">
           <CONNECTIONS>
             <CONNECTION INSTANCE="comp3_0" PORT="inp2"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="9" NAME="x3" RIGHT="0" SIGIS="undef" SIGNAME="data_in_0_x3">
+        <PORT DIR="O" LEFT="9" NAME="x3" RIGHT="0" SIGIS="undef" SIGNAME="image_RAM_0_x3">
           <CONNECTIONS>
             <CONNECTION INSTANCE="comp3_0" PORT="inp3"/>
           </CONNECTIONS>
@@ -501,14 +680,14 @@
             <CONNECTION INSTANCE="External_Ports" PORT="sys_clk"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="DFF_0_Q">
+        <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="controller_0_en_win">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="DFF_0" PORT="Q"/>
+            <CONNECTION INSTANCE="controller_0" PORT="en_win"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="rst" SIGIS="rst" SIGNAME="controller_0_rst">
+        <PORT DIR="I" NAME="rst" SIGIS="rst" SIGNAME="controller_0_rst_win">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="controller_0" PORT="rst"/>
+            <CONNECTION INSTANCE="controller_0" PORT="rst_win"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="15" NAME="addra" RIGHT="0" SIGIS="undef" SIGNAME="controller_0_addra">
@@ -568,7 +747,7 @@
         </PORT>
         <PORT DIR="O" LEFT="9" NAME="bias" RIGHT="0" SIGIS="undef" SIGNAME="weight_RAM_0_bias">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="PE_array9_0" PORT="psum1"/>
+            <CONNECTION INSTANCE="DFF_1" PORT="D"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

@@ -21,13 +21,14 @@
 
 
 module DFF(
-    input D,  
+    input [9:0] D,  
     input clk,
-    output reg Q
+    input en,
+    output reg [9:0] Q
 );
 
 always @(posedge clk) 
-    begin
-     Q <= D; 
+    if (en) begin
+        Q <= D; 
     end 
 endmodule 

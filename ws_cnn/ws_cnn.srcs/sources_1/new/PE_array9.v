@@ -40,9 +40,9 @@ module PE_array9(
 //    input [9:0] psum2,
 //    input [9:0] psum3,
     input clr,
-//    output [9:0] outp1,
-//    output [9:0] outp2,
-//    output [9:0] outp3,
+    output [9:0] outp1,
+    output [9:0] outp2,
+    output [9:0] outp3,
     output [9:0] acc_out
     );
 
@@ -56,11 +56,11 @@ wire [9:0] fx11, fx12, fx21,fx22,fx31,fx32;
 //assign w32 = 10'b0;
 //assign w33 = 10'b0;
 
-//assign outp1 = o31;
-//assign outp2 = o32;
-//assign outp3 = o33;
+assign outp1 = o31;
+assign outp2 = o32;
+assign outp3 = o33;
 
-WS_PE pe11(.psum(psum1), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w13), .xin(x1), .outp(o11), .f_inp(fx11));
+WS_PE_first pe11(.psum(psum1), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w13), .xin(x1), .outp(o11), .f_inp(fx11)); //PE_first stores psum value
 WS_PE pe12(.psum(zero_bias), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w12), .xin(fx11), .outp(o12), .f_inp(fx12));
 WS_PE pe13(.psum(zero_bias), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w11), .xin(fx12), .outp(o13));
 WS_PE pe21(.psum(o11), .enable(en), .sys_clk(sys_clk), .load_w(load_w), .win(w23), .xin(x2), .outp(o21), .f_inp(fx21));

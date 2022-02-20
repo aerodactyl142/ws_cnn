@@ -58,18 +58,21 @@
 module cnn_out1_DFF_0_0 (
   D,
   clk,
+  en,
   Q
 );
 
-input wire D;
+input wire [9 : 0] D;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME clk, FREQ_HZ 125000000, PHASE 0.000, CLK_DOMAIN cnn_out1_sys_clk" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 clk CLK" *)
 input wire clk;
-output wire Q;
+input wire en;
+output wire [9 : 0] Q;
 
   DFF inst (
     .D(D),
     .clk(clk),
+    .en(en),
     .Q(Q)
   );
 endmodule

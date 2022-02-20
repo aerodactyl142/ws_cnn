@@ -48,6 +48,7 @@ end
 
 always @ (posedge sys_clk) begin
 if (enable) begin
+//    $display(weights);
 //    forward = xin;
 //    if (load_w == 1'b1)
 //        weights = win;
@@ -61,14 +62,17 @@ if (enable) begin
     end
     else begin
         pout = weights * xin;
+//        $display(pout);
 //        pout[18] = ;
         if (weights[9] ^ xin[9])
             pout = ~pout + 1; //change back to two's complement
 //        if (psum[9] == 1'b0)
         outp = {pout[18], pout[14:6]} + psum; //19 bit back to 10 bits, to pick bits as required
+        
 //        else
 //            outp = {pout[18], pout[14:6]} - psum[8:0]; //19 bit back to 10 bits, to pick bits as required
     end
+//    $display("wt: ",weights*SF, " * ", xin*SF, " + ", psum*SF, " = ", outp*SF);
 //    else if (psum[9] == 1'b0) begin //positive bias
 //        if (weights[9] == 0 & xin[9] == 0) begin
 //            pout = weights * xin;// + long_bias;// + long_bias;

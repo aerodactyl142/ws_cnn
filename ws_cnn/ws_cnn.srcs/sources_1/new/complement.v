@@ -27,9 +27,11 @@ module complement(
     );
 //http://www.referencedesigner.com/tutorials/verilog/verilog_58.php
 initial begin
-    if (outp[9] == 1'b1)
+    if (outp[9] == 1'b1) begin
         outp = ~inp + 1; //negate and plus 1
         outp[9] = 1; //retain to show negative
+    end
+    else outp = inp;
 end
 
 endmodule

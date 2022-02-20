@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-# DFF, PE_array9, comp3, comp3, comp3, comp3, controller, counter, data_in, weight_RAM
+# DFF, DFF, DFF, OBUF, PE_array9, comp3, comp3, comp3, comp3, controller, counter, image_RAM, weight_RAM
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -165,8 +165,9 @@ proc create_root_design { parentCell } {
   # Create interface ports
 
   # Create ports
-  set acc_out [ create_bd_port -dir O -from 9 -to 0 acc_out ]
+  set dout [ create_bd_port -dir O -from 9 -to 0 dout ]
   set en [ create_bd_port -dir I en ]
+  set rst [ create_bd_port -dir I rst ]
   set sys_clk [ create_bd_port -dir I -type clk sys_clk ]
   set_property -dict [ list \
    CONFIG.FREQ_HZ {125000000} \
@@ -179,6 +180,39 @@ proc create_root_design { parentCell } {
      catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    } elseif { $DFF_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: DFF_1, and set properties
+  set block_name DFF
+  set block_cell_name DFF_1
+  if { [catch {set DFF_1 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $DFF_1 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: DFF_2, and set properties
+  set block_name DFF
+  set block_cell_name DFF_2
+  if { [catch {set DFF_2 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $DFF_2 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: OBUF_0, and set properties
+  set block_name OBUF
+  set block_cell_name OBUF_0
+  if { [catch {set OBUF_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $OBUF_0 eq "" } {
      catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
@@ -260,13 +294,13 @@ proc create_root_design { parentCell } {
      return 1
    }
   
-  # Create instance: data_in_0, and set properties
-  set block_name data_in
-  set block_cell_name data_in_0
-  if { [catch {set data_in_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+  # Create instance: image_RAM_0, and set properties
+  set block_name image_RAM
+  set block_cell_name image_RAM_0
+  if { [catch {set image_RAM_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
      catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
-   } elseif { $data_in_0 eq "" } {
+   } elseif { $image_RAM_0 eq "" } {
      catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
@@ -283,8 +317,12 @@ proc create_root_design { parentCell } {
    }
   
   # Create port connections
-  connect_bd_net -net PE_array9_0_acc_out [get_bd_ports acc_out] [get_bd_pins PE_array9_0/acc_out]
-  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_ports sys_clk] [get_bd_pins DFF_0/clk] [get_bd_pins PE_array9_0/sys_clk] [get_bd_pins comp3_0/sys_clk] [get_bd_pins comp3_1/sys_clk] [get_bd_pins comp3_2/sys_clk] [get_bd_pins comp3_3/sys_clk] [get_bd_pins controller_0/sys_clk] [get_bd_pins counter_0/clk] [get_bd_pins data_in_0/sys_clk] [get_bd_pins weight_RAM_0/clk]
+  connect_bd_net -net DFF_0_Q [get_bd_pins DFF_0/Q] [get_bd_pins DFF_1/en] [get_bd_pins DFF_2/en] [get_bd_pins PE_array9_0/en] [get_bd_pins controller_0/en] [get_bd_pins counter_0/en]
+  connect_bd_net -net DFF_1_Q [get_bd_pins DFF_1/Q] [get_bd_pins PE_array9_0/psum1]
+  connect_bd_net -net DFF_2_Q [get_bd_pins DFF_2/Q] [get_bd_pins controller_0/rst]
+  connect_bd_net -net OBUF_0_dout [get_bd_ports dout] [get_bd_pins OBUF_0/dpo]
+  connect_bd_net -net PE_array9_0_acc_out [get_bd_pins OBUF_0/di] [get_bd_pins PE_array9_0/acc_out] [get_bd_pins controller_0/acc_out]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_ports sys_clk] [get_bd_pins DFF_0/clk] [get_bd_pins DFF_1/clk] [get_bd_pins DFF_2/clk] [get_bd_pins OBUF_0/sys_clk] [get_bd_pins PE_array9_0/sys_clk] [get_bd_pins comp3_0/sys_clk] [get_bd_pins comp3_1/sys_clk] [get_bd_pins comp3_2/sys_clk] [get_bd_pins comp3_3/sys_clk] [get_bd_pins controller_0/sys_clk] [get_bd_pins counter_0/clk] [get_bd_pins image_RAM_0/sys_clk] [get_bd_pins weight_RAM_0/clk]
   connect_bd_net -net comp3_0_outp1 [get_bd_pins PE_array9_0/x1] [get_bd_pins comp3_0/outp1]
   connect_bd_net -net comp3_0_outp2 [get_bd_pins PE_array9_0/x2] [get_bd_pins comp3_0/outp2]
   connect_bd_net -net comp3_0_outp3 [get_bd_pins PE_array9_0/x3] [get_bd_pins comp3_0/outp3]
@@ -299,15 +337,23 @@ proc create_root_design { parentCell } {
   connect_bd_net -net comp3_3_outp3 [get_bd_pins PE_array9_0/w33] [get_bd_pins comp3_3/outp3]
   connect_bd_net -net controller_0_addra [get_bd_pins controller_0/addra] [get_bd_pins weight_RAM_0/addra]
   connect_bd_net -net controller_0_addrb [get_bd_pins controller_0/addrb] [get_bd_pins weight_RAM_0/addrb]
+  connect_bd_net -net controller_0_addro [get_bd_pins OBUF_0/addr] [get_bd_pins controller_0/addro]
+  connect_bd_net -net controller_0_clr [get_bd_pins PE_array9_0/clr] [get_bd_pins controller_0/clr]
+  connect_bd_net -net controller_0_en_din [get_bd_pins comp3_0/en] [get_bd_pins controller_0/en_din] [get_bd_pins image_RAM_0/en]
+  connect_bd_net -net controller_0_en_win [get_bd_pins comp3_1/en] [get_bd_pins comp3_2/en] [get_bd_pins comp3_3/en] [get_bd_pins controller_0/en_win] [get_bd_pins weight_RAM_0/en]
   connect_bd_net -net controller_0_load_w [get_bd_pins PE_array9_0/load_w] [get_bd_pins controller_0/load_w]
-  connect_bd_net -net controller_0_rst [get_bd_pins PE_array9_0/clr] [get_bd_pins controller_0/rst] [get_bd_pins counter_0/rst] [get_bd_pins data_in_0/rst] [get_bd_pins weight_RAM_0/rst]
+  connect_bd_net -net controller_0_rd_obuf [get_bd_pins OBUF_0/rd_addr] [get_bd_pins controller_0/rd_obuf]
+  connect_bd_net -net controller_0_rst_count [get_bd_pins controller_0/rst_count] [get_bd_pins counter_0/rst]
+  connect_bd_net -net controller_0_rst_din [get_bd_pins controller_0/rst_din] [get_bd_pins image_RAM_0/rst]
+  connect_bd_net -net controller_0_rst_win [get_bd_pins controller_0/rst_win] [get_bd_pins weight_RAM_0/rst]
+  connect_bd_net -net controller_0_we_obuf [get_bd_pins OBUF_0/we] [get_bd_pins controller_0/we_obuf]
   connect_bd_net -net counter_0_count [get_bd_pins controller_0/count] [get_bd_pins counter_0/count]
-  connect_bd_net -net data_in_0_x1 [get_bd_pins comp3_0/inp1] [get_bd_pins data_in_0/x1]
-  connect_bd_net -net data_in_0_x2 [get_bd_pins comp3_0/inp2] [get_bd_pins data_in_0/x2]
-  connect_bd_net -net data_in_0_x3 [get_bd_pins comp3_0/inp3] [get_bd_pins data_in_0/x3]
-  connect_bd_net -net en_1 [get_bd_pins DFF_0/Q] [get_bd_pins PE_array9_0/en] [get_bd_pins comp3_0/en] [get_bd_pins comp3_1/en] [get_bd_pins comp3_2/en] [get_bd_pins comp3_3/en] [get_bd_pins controller_0/en] [get_bd_pins counter_0/en] [get_bd_pins data_in_0/en] [get_bd_pins weight_RAM_0/en]
-  connect_bd_net -net en_2 [get_bd_ports en] [get_bd_pins DFF_0/D]
-  connect_bd_net -net weight_RAM_0_bias [get_bd_pins PE_array9_0/psum1] [get_bd_pins weight_RAM_0/bias]
+  connect_bd_net -net en_1 [get_bd_ports en] [get_bd_pins DFF_0/D] [get_bd_pins DFF_0/en]
+  connect_bd_net -net image_RAM_0_x1 [get_bd_pins comp3_0/inp1] [get_bd_pins image_RAM_0/x1]
+  connect_bd_net -net image_RAM_0_x2 [get_bd_pins comp3_0/inp2] [get_bd_pins image_RAM_0/x2]
+  connect_bd_net -net image_RAM_0_x3 [get_bd_pins comp3_0/inp3] [get_bd_pins image_RAM_0/x3]
+  connect_bd_net -net rst_1 [get_bd_ports rst] [get_bd_pins DFF_2/D]
+  connect_bd_net -net weight_RAM_0_bias [get_bd_pins DFF_1/D] [get_bd_pins weight_RAM_0/bias]
   connect_bd_net -net weight_RAM_0_w11 [get_bd_pins comp3_1/inp1] [get_bd_pins weight_RAM_0/w11]
   connect_bd_net -net weight_RAM_0_w12 [get_bd_pins comp3_1/inp2] [get_bd_pins weight_RAM_0/w12]
   connect_bd_net -net weight_RAM_0_w13 [get_bd_pins comp3_1/inp3] [get_bd_pins weight_RAM_0/w13]

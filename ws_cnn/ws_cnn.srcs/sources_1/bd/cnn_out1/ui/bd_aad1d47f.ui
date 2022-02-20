@@ -2,54 +2,70 @@
    ExpandedHierarchyInLayout: "",
    guistr: "# # String gsaved with Nlview 6.8.5  2018-01-30 bk=1.4354 VDI=40 GEI=35 GUI=JA:1.6 non-TLS
 #  -string -flagsOSRD
-preplace port sys_clk -pg 1 -y 440 -defaultsOSRD
-preplace port en -pg 1 -y 420 -defaultsOSRD
-preplace portBus acc_out -pg 1 -y 620 -defaultsOSRD
-preplace inst PE_array9_0 -pg 1 -lvl 6 -y 620 -defaultsOSRD
-preplace inst comp3_0 -pg 1 -lvl 5 -y 100 -defaultsOSRD
-preplace inst comp3_1 -pg 1 -lvl 5 -y 280 -defaultsOSRD
-preplace inst data_in_0 -pg 1 -lvl 4 -y 120 -defaultsOSRD
-preplace inst comp3_2 -pg 1 -lvl 5 -y 460 -defaultsOSRD
-preplace inst comp3_3 -pg 1 -lvl 5 -y 660 -defaultsOSRD
-preplace inst counter_0 -pg 1 -lvl 2 -y 520 -defaultsOSRD
-preplace inst controller_0 -pg 1 -lvl 3 -y 500 -defaultsOSRD
-preplace inst DFF_0 -pg 1 -lvl 1 -y 430 -defaultsOSRD
-preplace inst weight_RAM_0 -pg 1 -lvl 4 -y 490 -defaultsOSRD
+preplace port sys_clk -pg 1 -y 280 -defaultsOSRD
+preplace port rst -pg 1 -y 370 -defaultsOSRD
+preplace port en -pg 1 -y 260 -defaultsOSRD
+preplace portBus dout -pg 1 -y 530 -defaultsOSRD
+preplace inst OBUF_0 -pg 1 -lvl 7 -y 550 -defaultsOSRD
+preplace inst DFF_1 -pg 1 -lvl 5 -y 870 -defaultsOSRD
+preplace inst PE_array9_0 -pg 1 -lvl 6 -y 450 -defaultsOSRD
+preplace inst DFF_2 -pg 1 -lvl 2 -y 390 -defaultsOSRD
+preplace inst image_RAM_0 -pg 1 -lvl 4 -y 730 -defaultsOSRD
+preplace inst comp3_0 -pg 1 -lvl 5 -y 710 -defaultsOSRD
+preplace inst comp3_1 -pg 1 -lvl 5 -y 100 -defaultsOSRD
+preplace inst comp3_2 -pg 1 -lvl 5 -y 310 -defaultsOSRD
+preplace inst comp3_3 -pg 1 -lvl 5 -y 490 -defaultsOSRD
+preplace inst counter_0 -pg 1 -lvl 2 -y 530 -defaultsOSRD
+preplace inst controller_0 -pg 1 -lvl 3 -y 450 -defaultsOSRD
+preplace inst weight_RAM_0 -pg 1 -lvl 4 -y 360 -defaultsOSRD
+preplace inst DFF_0 -pg 1 -lvl 1 -y 280 -defaultsOSRD
+preplace netloc DFF_1_Q 1 5 1 1580
 preplace netloc comp3_3_outp2 1 5 1 N
-preplace netloc weight_RAM_0_w31 1 4 1 1000
-preplace netloc comp3_0_outp1 1 5 1 1350
-preplace netloc PE_array9_0_acc_out 1 6 1 N
-preplace netloc comp3_2_outp1 1 5 1 1290
+preplace netloc weight_RAM_0_w31 1 4 1 1200
+preplace netloc comp3_0_outp1 1 5 1 1470
+preplace netloc PE_array9_0_acc_out 1 2 5 490 0 NJ 0 NJ 0 NJ 0 1860
+preplace netloc controller_0_we_obuf 1 3 4 NJ 530 1140J 590 1500J 680 1840
+preplace netloc controller_0_rst_win 1 3 1 820
+preplace netloc comp3_2_outp1 1 5 1 1460
 preplace netloc comp3_3_outp3 1 5 1 N
-preplace netloc weight_RAM_0_w32 1 4 1 980
-preplace netloc comp3_0_outp2 1 5 1 1340
-preplace netloc comp3_2_outp2 1 5 1 1280
-preplace netloc weight_RAM_0_w21 1 4 1 N
-preplace netloc weight_RAM_0_w33 1 4 1 970
-preplace netloc comp3_0_outp3 1 5 1 1330
-preplace netloc data_in_0_x1 1 4 1 N
-preplace netloc en_1 1 1 5 180 430 410 600 700 200 990 760 1280J
-preplace netloc comp3_2_outp3 1 5 1 1270
-preplace netloc weight_RAM_0_w22 1 4 1 N
-preplace netloc data_in_0_x2 1 4 1 N
-preplace netloc en_2 1 0 1 NJ
-preplace netloc weight_RAM_0_w11 1 4 1 960
-preplace netloc weight_RAM_0_w23 1 4 1 N
-preplace netloc data_in_0_x3 1 4 1 N
-preplace netloc controller_0_rst 1 1 5 190 610 NJ 610 690 790 NJ 790 1350J
-preplace netloc weight_RAM_0_w12 1 4 1 980
-preplace netloc weight_RAM_0_w13 1 4 1 970
-preplace netloc clk_wiz_0_clk_out1 1 0 6 20 500 190 440 400 590 670 40 1010 560 1260J
-preplace netloc comp3_1_outp1 1 5 1 1320
-preplace netloc comp3_1_outp2 1 5 1 1310
-preplace netloc controller_0_addra 1 3 1 N
-preplace netloc comp3_1_outp3 1 5 1 1300
-preplace netloc controller_0_load_w 1 3 3 680 780 NJ 780 1310J
-preplace netloc controller_0_addrb 1 3 1 N
-preplace netloc counter_0_count 1 2 1 N
-preplace netloc weight_RAM_0_bias 1 4 2 960 770 1340J
+preplace netloc weight_RAM_0_w32 1 4 1 1190
+preplace netloc comp3_0_outp2 1 5 1 1510
+preplace netloc en_1 1 0 1 20
+preplace netloc controller_0_en_win 1 3 2 850 190 1210
+preplace netloc controller_0_en_din 1 3 2 790 650 1110
+preplace netloc controller_0_rst_count 1 1 3 240 650 NJ 650 770
+preplace netloc comp3_2_outp2 1 5 1 1480
+preplace netloc weight_RAM_0_w21 1 4 1 1180
+preplace netloc weight_RAM_0_w33 1 4 1 1180
+preplace netloc comp3_0_outp3 1 5 1 1530
+preplace netloc rst_1 1 0 2 NJ 370 NJ
+preplace netloc comp3_2_outp3 1 5 1 1520
+preplace netloc weight_RAM_0_w22 1 4 1 1190
+preplace netloc image_RAM_0_x1 1 4 1 N
+preplace netloc weight_RAM_0_w11 1 4 1 1110
+preplace netloc weight_RAM_0_w23 1 4 1 1200
+preplace netloc image_RAM_0_x2 1 4 1 N
+preplace netloc DFF_2_Q 1 2 1 460
+preplace netloc weight_RAM_0_w12 1 4 1 1130
+preplace netloc image_RAM_0_x3 1 4 1 N
+preplace netloc controller_0_rst_din 1 3 1 780
+preplace netloc weight_RAM_0_w13 1 4 1 1170
+preplace netloc clk_wiz_0_clk_out1 1 0 7 10 360 240 310 480 250 830 180 1160 960 1560 700 1870
+preplace netloc OBUF_0_dout 1 7 1 2130
+preplace netloc DFF_0_Q 1 1 5 230 280 470 170 NJ 170 1150 950 1570
+preplace netloc controller_0_clr 1 3 3 800 200 NJ 200 1550J
+preplace netloc comp3_1_outp1 1 5 1 1580
+preplace netloc controller_0_rd_obuf 1 3 4 NJ 550 1120J 610 1480J 690 1880
+preplace netloc comp3_1_outp2 1 5 1 1570
+preplace netloc controller_0_addra 1 3 1 840
+preplace netloc controller_0_addro 1 3 4 NJ 570 1110J 600 1490J 670 1850
+preplace netloc comp3_1_outp3 1 5 1 1560
+preplace netloc controller_0_load_w 1 3 3 810 210 NJ 210 1540J
+preplace netloc controller_0_addrb 1 3 1 850
+preplace netloc counter_0_count 1 2 1 470
+preplace netloc weight_RAM_0_bias 1 4 1 1130
 preplace netloc comp3_3_outp1 1 5 1 N
-levelinfo -pg 1 0 100 300 550 840 1140 1480 1630 -top 0 -bot 840
+levelinfo -pg 1 -10 130 360 640 990 1340 1710 2010 2160 -top -10 -bot 970
 ",
 }
 {

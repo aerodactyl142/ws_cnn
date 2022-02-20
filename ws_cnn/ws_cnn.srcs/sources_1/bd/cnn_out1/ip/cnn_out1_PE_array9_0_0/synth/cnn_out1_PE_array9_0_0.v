@@ -73,6 +73,9 @@ module cnn_out1_PE_array9_0_0 (
   en,
   psum1,
   clr,
+  outp1,
+  outp2,
+  outp3,
   acc_out
 );
 
@@ -95,6 +98,9 @@ input wire load_w;
 input wire en;
 input wire [9 : 0] psum1;
 input wire clr;
+output wire [9 : 0] outp1;
+output wire [9 : 0] outp2;
+output wire [9 : 0] outp3;
 output wire [9 : 0] acc_out;
 
   PE_array9 inst (
@@ -115,6 +121,9 @@ output wire [9 : 0] acc_out;
     .en(en),
     .psum1(psum1),
     .clr(clr),
+    .outp1(outp1),
+    .outp2(outp2),
+    .outp3(outp3),
     .acc_out(acc_out)
   );
 endmodule

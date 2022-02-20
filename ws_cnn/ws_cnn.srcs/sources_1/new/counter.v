@@ -30,13 +30,13 @@ module counter(
 
 reg [9:0] max_count = 1023;
 
-reg [7:0] ticktock = 8'b0;
+reg [9:0] ticktock = 10'b0;
 
 assign count = ticktock;
 
 always @ (posedge clk) begin
     if (rst)
-        ticktock = 8'b0;
+        ticktock = 10'b0;
     else if (en) begin
         if (ticktock < max_count)
             ticktock = ticktock + 1'b1;
