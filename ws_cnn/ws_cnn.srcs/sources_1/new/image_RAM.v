@@ -36,7 +36,7 @@ output [9:0] x1, x2, x3
 parameter MAX_IMG = 1024;
 //(*dont_touch = "true"*) 
 reg [7:0] ImageMem [0:MAX_IMG-1];
-initial $readmemb("image_test.data",ImageMem);
+initial $readmemb("image0.data",ImageMem);
 
 //always @ (rst) begin
 //    dout1 = 10'b0;

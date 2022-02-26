@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Feb 20 11:04:12 2022" VIVADOVERSION="2018.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Feb 21 03:39:29 2022" VIVADOVERSION="2018.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="tul.com.tw:pynq-z2:part0:1.0" DEVICE="7z020" NAME="cnn_out1" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
     <PORT CLKFREQUENCY="125000000" DIR="I" NAME="sys_clk" SIGIS="clk" SIGNAME="External_Ports_sys_clk">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="counter_0" PORT="clk"/>
-        <CONNECTION INSTANCE="PE_array9_0" PORT="sys_clk"/>
         <CONNECTION INSTANCE="DFF_0" PORT="clk"/>
         <CONNECTION INSTANCE="DFF_2" PORT="clk"/>
         <CONNECTION INSTANCE="DFF_1" PORT="clk"/>
+        <CONNECTION INSTANCE="counter_0" PORT="clk"/>
+        <CONNECTION INSTANCE="controller_0" PORT="sys_clk"/>
+        <CONNECTION INSTANCE="OBUF_0" PORT="sys_clk"/>
+        <CONNECTION INSTANCE="image_RAM_0" PORT="sys_clk"/>
         <CONNECTION INSTANCE="weight_RAM_0" PORT="clk"/>
         <CONNECTION INSTANCE="comp3_0" PORT="sys_clk"/>
         <CONNECTION INSTANCE="comp3_1" PORT="sys_clk"/>
         <CONNECTION INSTANCE="comp3_2" PORT="sys_clk"/>
         <CONNECTION INSTANCE="comp3_3" PORT="sys_clk"/>
-        <CONNECTION INSTANCE="image_RAM_0" PORT="sys_clk"/>
-        <CONNECTION INSTANCE="controller_0" PORT="sys_clk"/>
-        <CONNECTION INSTANCE="OBUF_0" PORT="sys_clk"/>
+        <CONNECTION INSTANCE="PE_array9_0" PORT="sys_clk"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="en" SIGIS="undef" SIGNAME="External_Ports_en">
@@ -67,10 +67,10 @@
         <PORT DIR="O" LEFT="9" NAME="Q" RIGHT="0" SIGIS="undef" SIGNAME="DFF_0_Q">
           <CONNECTIONS>
             <CONNECTION INSTANCE="DFF_1" PORT="en"/>
-            <CONNECTION INSTANCE="counter_0" PORT="en"/>
             <CONNECTION INSTANCE="DFF_2" PORT="en"/>
-            <CONNECTION INSTANCE="PE_array9_0" PORT="en"/>
+            <CONNECTION INSTANCE="counter_0" PORT="en"/>
             <CONNECTION INSTANCE="controller_0" PORT="en"/>
+            <CONNECTION INSTANCE="PE_array9_0" PORT="en"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -154,15 +154,14 @@
             <CONNECTION INSTANCE="controller_0" PORT="we_obuf"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="rd" SIGIS="undef"/>
         <PORT DIR="I" LEFT="9" NAME="addr" RIGHT="0" SIGIS="undef" SIGNAME="controller_0_addro">
           <CONNECTIONS>
             <CONNECTION INSTANCE="controller_0" PORT="addro"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="9" NAME="rd_addr" RIGHT="0" SIGIS="undef" SIGNAME="controller_0_rd_obuf">
+        <PORT DIR="I" LEFT="9" NAME="rd_addr" RIGHT="0" SIGIS="undef" SIGNAME="controller_0_addr_rd">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="controller_0" PORT="rd_obuf"/>
+            <CONNECTION INSTANCE="controller_0" PORT="addr_rd"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="9" NAME="di" RIGHT="0" SIGIS="undef" SIGNAME="PE_array9_0_acc_out">
@@ -170,7 +169,6 @@
             <CONNECTION INSTANCE="PE_array9_0" PORT="acc_out"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="9" NAME="spo" RIGHT="0" SIGIS="undef"/>
         <PORT DIR="O" LEFT="9" NAME="dpo" RIGHT="0" SIGIS="undef" SIGNAME="OBUF_0_dpo">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="dout"/>
@@ -488,10 +486,9 @@
       <PARAMETERS>
         <PARAMETER NAME="n" VALUE="1"/>
         <PARAMETER NAME="setup" VALUE="10"/>
-        <PARAMETER NAME="layer_step" VALUE="8"/>
+        <PARAMETER NAME="layer_step" VALUE="28"/>
         <PARAMETER NAME="gap" VALUE="5"/>
-        <PARAMETER NAME="OUT_DIM" VALUE="8"/>
-        <PARAMETER NAME="MAX_COUNT" VALUE="114"/>
+        <PARAMETER NAME="MAX_COUNT" VALUE="934"/>
         <PARAMETER NAME="Component_Name" VALUE="cnn_out1_controller_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -536,8 +533,8 @@
         </PORT>
         <PORT DIR="O" NAME="en_din" SIGIS="undef" SIGNAME="controller_0_en_din">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="comp3_0" PORT="en"/>
             <CONNECTION INSTANCE="image_RAM_0" PORT="en"/>
+            <CONNECTION INSTANCE="comp3_0" PORT="en"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="rst_din" SIGIS="undef" SIGNAME="controller_0_rst_din">
@@ -577,17 +574,17 @@
             <CONNECTION INSTANCE="OBUF_0" PORT="we"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="rd_obuf" SIGIS="undef" SIGNAME="controller_0_rd_obuf">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="OBUF_0" PORT="rd_addr"/>
-          </CONNECTIONS>
-        </PORT>
+        <PORT DIR="O" NAME="rd_obuf" SIGIS="undef"/>
         <PORT DIR="O" LEFT="9" NAME="addro" RIGHT="0" SIGIS="undef" SIGNAME="controller_0_addro">
           <CONNECTIONS>
             <CONNECTION INSTANCE="OBUF_0" PORT="addr"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="9" NAME="addr_rd" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" LEFT="9" NAME="addr_rd" RIGHT="0" SIGIS="undef" SIGNAME="controller_0_addr_rd">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="OBUF_0" PORT="rd_addr"/>
+          </CONNECTIONS>
+        </PORT>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
@@ -624,11 +621,9 @@
     <MODULE FULLNAME="/image_RAM_0" HWVERSION="1.0" INSTANCE="image_RAM_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="image_RAM" VLNV="xilinx.com:module_ref:image_RAM:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="MAX_IMG" VALUE="100"/>
-        <PARAMETER NAME="IMG_WIDTH" VALUE="10"/>
-        <PARAMETER NAME="kernel_size" VALUE="3"/>
-        <PARAMETER NAME="PE_SIZE" VALUE="9"/>
-        <PARAMETER NAME="MAX_ADDR" VALUE="100"/>
+        <PARAMETER NAME="MAX_IMG" VALUE="1024"/>
+        <PARAMETER NAME="IMG_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="kernel_size" VALUE="5"/>
         <PARAMETER NAME="Component_Name" VALUE="cnn_out1_image_RAM_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
@@ -669,8 +664,8 @@
     <MODULE FULLNAME="/weight_RAM_0" HWVERSION="1.0" INSTANCE="weight_RAM_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="weight_RAM" VLNV="xilinx.com:module_ref:weight_RAM:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="kernel_size" VALUE="3"/>
-        <PARAMETER NAME="MAX_WGT" VALUE="77"/>
+        <PARAMETER NAME="kernel_size" VALUE="5"/>
+        <PARAMETER NAME="MAX_WGT" VALUE="61706"/>
         <PARAMETER NAME="Component_Name" VALUE="cnn_out1_weight_RAM_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>

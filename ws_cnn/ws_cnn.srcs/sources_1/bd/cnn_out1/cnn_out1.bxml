@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="cnn_out1" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="RESET" Timestamp="1645335564"/>
-    <Generation Name="IMPLEMENTATION" State="RESET" Timestamp="1645335564"/>
-    <Generation Name="SIMULATION" State="RESET" Timestamp="1645335564"/>
-    <Generation Name="HW_HANDOFF" State="RESET" Timestamp="1645335564"/>
+    <Generation Name="SYNTHESIS" State="RESET" Timestamp="1645733097"/>
+    <Generation Name="IMPLEMENTATION" State="RESET" Timestamp="1645733097"/>
+    <Generation Name="SIMULATION" State="RESET" Timestamp="1645733097"/>
+    <Generation Name="HW_HANDOFF" State="RESET" Timestamp="1645733097"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="cnn_out1_sim_netlist.vhdl" Type="VHDL">
         <Properties IsEditable="true" IsVisible="true" Timestamp="1645326334" IsTrackable="true" IsStatusTracked="false"/>

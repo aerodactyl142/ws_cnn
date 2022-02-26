@@ -22,16 +22,18 @@
 module complement(
     input sys_clk,
     input en,
-    input [9:0] inp,
-    output reg [9:0] outp
+    input [10:0] inp,
+    output reg [10:0] outp
     );
 //http://www.referencedesigner.com/tutorials/verilog/verilog_58.php
-initial begin
-    if (outp[9] == 1'b1) begin
-        outp = ~inp + 1; //negate and plus 1
-        outp[9] = 1; //retain to show negative
+always @ (posedge sys_clk) begin
+    if (en) begin
+        if (inp[10] == 1'b1) begin
+            outp = ~inp + 1; //negate and plus 1
+            outp[10] = 1; //retain to show negative
+        end
+        else outp = inp;
     end
-    else outp = inp;
 end
 
 endmodule

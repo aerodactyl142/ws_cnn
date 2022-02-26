@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-//Date        : Sun Feb 20 11:04:12 2022
+//Date        : Mon Feb 21 03:39:28 2022
 //Host        : DESKTOP-AGK7S8O running 64-bit major release  (build 9200)
 //Command     : generate_target cnn_out1.bd
 //Design      : cnn_out1
@@ -38,6 +38,7 @@ module cnn_out1
   wire [9:0]comp3_3_outp1;
   wire [9:0]comp3_3_outp2;
   wire [9:0]comp3_3_outp3;
+  wire [9:0]controller_0_addr_rd;
   wire [15:0]controller_0_addra;
   wire [15:0]controller_0_addrb;
   wire [9:0]controller_0_addro;
@@ -45,7 +46,6 @@ module cnn_out1
   wire controller_0_en_din;
   wire controller_0_en_win;
   wire controller_0_load_w;
-  wire controller_0_rd_obuf;
   wire controller_0_rst_count;
   wire controller_0_rst_din;
   wire controller_0_rst_win;
@@ -90,8 +90,7 @@ module cnn_out1
        (.addr(controller_0_addro),
         .di(PE_array9_0_acc_out),
         .dpo(OBUF_0_dout),
-        .rd(1'b0),
-        .rd_addr({controller_0_rd_obuf,controller_0_rd_obuf,controller_0_rd_obuf,controller_0_rd_obuf,controller_0_rd_obuf,controller_0_rd_obuf,controller_0_rd_obuf,controller_0_rd_obuf,controller_0_rd_obuf,controller_0_rd_obuf}),
+        .rd_addr(controller_0_addr_rd),
         .sys_clk(clk_wiz_0_clk_out1),
         .we(controller_0_we_obuf));
   cnn_out1_PE_array9_0_0 PE_array9_0
@@ -151,6 +150,7 @@ module cnn_out1
         .sys_clk(clk_wiz_0_clk_out1));
   cnn_out1_controller_0_0 controller_0
        (.acc_out(PE_array9_0_acc_out),
+        .addr_rd(controller_0_addr_rd),
         .addra(controller_0_addra),
         .addrb(controller_0_addrb),
         .addro(controller_0_addro),
@@ -160,7 +160,6 @@ module cnn_out1
         .en_din(controller_0_en_din),
         .en_win(controller_0_en_win),
         .load_w(controller_0_load_w),
-        .rd_obuf(controller_0_rd_obuf),
         .rst(DFF_2_Q[0]),
         .rst_count(controller_0_rst_count),
         .rst_din(controller_0_rst_din),

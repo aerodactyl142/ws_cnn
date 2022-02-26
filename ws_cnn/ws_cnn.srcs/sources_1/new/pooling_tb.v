@@ -68,6 +68,34 @@ initial begin
     #period;
     $display("x1: ", x1*SF, "  x2: ", x2*SF, "    x3: ", x3*SF, "    x4: ", x4*SF);
     $display("Avg: ", aout*SF, "    Max: ", mpout*SF); 
+    x1 = 10'b0;
+    x2 = 10'b0;
+    x3 = 10'b1110;
+    x4 = 10'b1110;
+    #period;
+    $display("x1: ", x1*SF, "  x2: ", x2*SF, "    x3: ", x3*SF, "    x4: ", x4*SF);
+    $display("Avg: ", aout*SF, "    Max: ", mpout*SF); 
+    x1 = 10'b0;
+    x2 = 10'b0;
+    x3 = 10'b111;
+    x4 = 10'b0;
+    #period;
+    $display("x1: ", x1*SF, "  x2: ", x2*SF, "    x3: ", x3*SF, "    x4: ", x4*SF);
+    $display("Avg: ", aout*SF, "    Max: ", mpout*SF); 
+    x1 = 10'b1110;
+    x2 = 10'b1110;
+    x3 = 10'b11110;
+    x4 = 10'b11001;
+    #period;
+    $display("x1: ", x1*SF, "  x2: ", x2*SF, "    x3: ", x3*SF, "    x4: ", x4*SF);
+    $display("Avg: ", aout*SF, "    Max: ", mpout*SF); 
+    x1 = 10'b0;
+    x2 = 10'b1100;
+    x3 = 10'b0101;
+    x4 = 10'b0;
+    #period;
+    $display("x1: ", x1*SF, "  x2: ", x2*SF, "    x3: ", x3*SF, "    x4: ", x4*SF);
+    $display("Avg: ", aout*SF, "    Max: ", mpout*SF); 
 end
 
 endmodule

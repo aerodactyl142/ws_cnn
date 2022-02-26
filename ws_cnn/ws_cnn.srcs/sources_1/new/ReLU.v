@@ -21,16 +21,17 @@
 
 
 module ReLU(
-input [9:0] inp,
+input [10:0] inp,
 input sys_clk,
 input en,
-output reg [9:0] outp
+output reg [10:0] outp
     );
     
 always @ (posedge sys_clk) begin
  if (en) begin
-    if (inp[9] == 1'b1)
-        outp = 10'b0;
+//    $display("ReLU ", inp);
+    if (inp[10] == 1'b1)
+        outp = 11'b0;
     else
         outp = inp;
  end

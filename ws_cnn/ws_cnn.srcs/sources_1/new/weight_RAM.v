@@ -41,7 +41,7 @@ module weight_RAM(
 parameter [2:0] kernel_size = 5;
 parameter MAX_WGT = 61706;
 reg [7:0] WeightMem [1:MAX_WGT];
-initial $readmemb("weights-lenet5.data",WeightMem);
+initial $readmemb("lenet_relu_wt.data",WeightMem);
 
 always @ (posedge clk or posedge rst) begin
     if (rst) begin

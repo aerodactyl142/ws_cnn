@@ -21,10 +21,10 @@
 
 
 module DFF(
-    input [9:0] D,  
+    input [10:0] D,  
     input clk,
     input en,
-    output reg [9:0] Q
+    output reg [10:0] Q
 );
 
 always @(posedge clk) 
