@@ -1,5 +1,7 @@
 # Systolic Array Based Convolutional Neural Network Accelerator
 
+Paper is available on IEEE at: https://ieeexplore.ieee.org/document/10008429
+
 Systolic dataflow makes use of the data reuse in convolution by preloading data into the array such that the processing elements (PEs) will propagate the data automatically through the array to facilitate the convolution process and reduce power consumption. An example of that is the Weight Stationary dataflow, which preloads the weights into the PE array. Input data are passed from one PE to the next directly. The only input will be the initial input from the left side of the PE array.
 
 ![WS](https://user-images.githubusercontent.com/25524099/165014632-479fa14b-0bc1-473b-8fd0-d88ae07f87ee.png)
